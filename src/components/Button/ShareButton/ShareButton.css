@@ -1,0 +1,19 @@
+.shareButton {
+    background-color: #e8e8e8;
+    color: rgb(135, 138, 140);
+    border: none;
+    border-radius: 2px;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
+.shareButton-text {
+    font-size: 1.6rem;
+}

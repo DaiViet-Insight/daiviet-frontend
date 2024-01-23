@@ -1,0 +1,15 @@
+.blog {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: 70px;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #dae0e6;
+}
+
+.blog-left {
+    width: 100%;
+    max-width: 600px;
+}

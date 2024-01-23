@@ -1,0 +1,51 @@
+.profileHeader {
+    padding:0 20px;
+    background-color: #fff;
+}
+
+.profileHeader__menu {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.profileHeader__menuItem {
+    position: relative;
+    display: inline-block;
+}
+
+.profileHeader__menuItem-link::after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+}
+
+.profileHeader__menuItem-link {
+    display: inline-block;
+    padding: 8px 16px;
+    color: #000;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.profileHeader__menuItem-link:hover {
+    color: #0079D3;
+}
+
+.profileHeader__menuItem-link:hover::after {
+    background-color: #0079D3;
+}
+
+.profileHeader__menuItem-link--active::after {
+    background-color: #0079D3;
+}
+
+.profileHeader__menuItem-link--active {
+    color: #0079D3;
+}

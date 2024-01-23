@@ -1,0 +1,30 @@
+.downVoteButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+.downVoteButton:hover {
+    background-color: var(--downVoteButton-hover-color, #e5e5e5);
+}
+
+.downVoteButton-icon {
+    width: 2rem;
+    height: 2rem;
+    fill: #000;
+}
+
+.downVoteButton-icon line {
+    stroke-width: 20px;
+}
+
+.downVoteButton:hover .downVoteButton-icon line {
+    stroke: #5a75cc;
+}

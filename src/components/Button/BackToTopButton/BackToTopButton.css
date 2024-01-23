@@ -1,0 +1,26 @@
+.backToTopButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    color: #fff;
+    background-color: #0079D3;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+    transform: scale(0);
+    opacity: 0;
+}
+
+.backToTopButton.backToTopButton--show {
+    transform: scale(1);
+    opacity: 1;
+}

@@ -1,0 +1,21 @@
+.comments {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #2e2f30;
+}
+
+.comment-container {
+    min-width: 1200px;
+    width: 1200px;
+    background-color: #dae0e6;
+}
+
+.comment-body {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 30px 0 30px;
+}

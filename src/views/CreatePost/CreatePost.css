@@ -1,0 +1,126 @@
+/* Important */
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: 600;
+}
+
+/* CreatePost */
+.createPost {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 70px;
+    min-height: 100vh;
+    background-color: #dae0e6;
+}
+
+/* Left */
+.createPost-left {
+    width: 100%;
+    max-width: 800px;
+}
+
+.createPost-left__header {
+    margin-bottom: 20px;
+}
+
+.createPost-left__header::after {
+    content: '';
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+}
+
+.createPost-left__header-heading {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.ql-editor {
+    min-height: 300px;
+}
+
+/* Body */
+.createPost-left__body {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.createPost-left__body-title {
+    margin-bottom: 20px;
+}
+
+.createPost-left__body-title input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 5px;
+}
+
+/* Content */
+
+.createPost-left__body-content-editor {
+    overflow-y: auto; /* Add vertical scrolling when the content exceeds the height */
+}
+
+/* Footer */
+
+.createPost-left__body-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.createPost-left__body-footer-btn {
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.createPost-left__body-footer-btn:hover {
+    color: #fff;
+    background-color: #0079D3;
+}
+
+/* Right */
+.createPost-right {
+    width: 100%;
+    max-width: 270px;
+}
+
+.createPost-right__select {
+    margin-bottom: 28px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 5px;
+}
+
+.createPost-right__select option {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}

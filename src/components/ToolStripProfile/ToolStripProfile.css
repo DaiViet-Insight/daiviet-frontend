@@ -1,0 +1,38 @@
+.ToolStripProfile {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #e1e4e8;
+    cursor: default;
+}
+
+.ToolStripProfile-item__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    min-width: 200px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #24292e;
+    text-decoration: none;
+}
+
+.ToolStripProfile-item__subitem-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.ToolStripProfile-item__subitem-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 4px 8px 40px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #24292e;
+    text-decoration: none;
+    cursor: pointer;
+}
