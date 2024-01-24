@@ -1,0 +1,14 @@
+.lecture {
+    padding-top: 50px;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.lecture-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 30px 120px;
+}

@@ -19,7 +19,7 @@ const NotFound = ({ setIsPageNotFound }) => {
             <span className="notFound-code">404</span>
             <h1 className="notFound-title">Page Not Found</h1>
             <div className="notFound-action">
-                <Link to="./posts" className="notFound-btn">Go Home</Link>
+                <Link to="./lectures" className="notFound-btn">Go Home</Link>
             </div>
         </div>
     );
