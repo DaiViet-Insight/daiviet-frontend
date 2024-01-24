@@ -47,7 +47,7 @@ const CommentInput = ({ isReply = false, cancelClickEvent , replyClickEvent, com
                 theme="snow"
                 modules={modules}
                 className="commentInput__body-content-editor"
-                placeholder="Content"
+                placeholder="Nôi dung bình luận"
                 onChange={setContent}
             />
             <div className="commentInput__body-actions">
@@ -58,13 +58,13 @@ const CommentInput = ({ isReply = false, cancelClickEvent , replyClickEvent, com
                             className="commentInput__body-actions-button commentInput__body-actions-button--cancel"
                             onClick={handleCancelClick}
                         >
-                            Cancel
+                            Hủy
                         </button>
                         <button 
                             className="commentInput__body-actions-button commentInput__body-actions-button--reply"
                             onClick={handleReplyClick}
                         >
-                            Reply
+                            Phản hồi
                         </button>
                     </>
                     :
@@ -73,13 +73,13 @@ const CommentInput = ({ isReply = false, cancelClickEvent , replyClickEvent, com
                             className="commentInput__body-actions-button commentInput__body-actions-button--reset" 
                             onClick={handleResetClick}
                         >
-                            Reset
+                            Làm mới
                         </button>
                         <button 
                             className="commentInput__body-actions-button commentInput__body-actions-button--comment"
                             onClick={handleCommentClick}
                         >
-                            Comment
+                            Bình luận
                         </button>
                     </>
                 }

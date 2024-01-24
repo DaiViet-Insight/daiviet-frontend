@@ -43,7 +43,6 @@ const PostPanel = ({ post }) => {
                 </div>
                 <div className="post-panel-footer">
                     <CommentButton clickEvent={handleCommentBtnClick} />
-                    <ShareButton />
                     <SavePostButton clickEvent={handleSavePostBtnClick} />
                 </div>
             </div>

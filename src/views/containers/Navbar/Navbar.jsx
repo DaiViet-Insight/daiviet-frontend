@@ -61,7 +61,7 @@ const Navbar = () => {
                 <label htmlFor="navbar-search" className="navbar-search__label">
                     <FontAwesomeIcon icon={faMagnifyingGlass} className="navbar-search-label__icon" />
                 </label>
-                <input type="text" id="navbar-search" className="navbar-search__input" placeholder="Search Reddit" />
+                <input type="text" id="navbar-search" className="navbar-search__input" placeholder="Tìm kiếm" />
             </div>
             <ul className="navbar-list">
                 <li className="navbar-item navbar-item__notification">
