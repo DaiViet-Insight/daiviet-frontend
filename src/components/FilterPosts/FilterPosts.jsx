@@ -10,19 +10,19 @@ const FilterPosts = () => {
         <div className="filter-posts">
             <Link to="/posts?category=best" className="filter-posts-link">
                 <FontAwesomeIcon icon={faRocket} className="filter-posts__link-icon" />
-                Best
+                Tốt nhất
             </Link>
             <Link to="/posts?category=hot" className="filter-posts-link">
                 <FontAwesomeIcon icon={faFire} className="filter-posts__link-icon" />
-                Hot
+                Nổi bật
             </Link>
             <Link to="/posts?category=new" className="filter-posts-link">
                 <FontAwesomeIcon icon={faSun} className="filter-posts__link-icon" />
-                New
+                Mới nhất
             </Link>
             <Link to="/posts?category=top" className="filter-posts-link">
                 <FontAwesomeIcon icon={faRankingStar} />
-                Top
+                Dẫn đầu
             </Link>
         </div>
     );

@@ -23,7 +23,7 @@ const ProfileHeader = ({ profile }) => {
                         className="profileHeader__menuItem-link profileHeader__menuItem-link--active"
                         onClick={handleActiveLink}
                     >
-                        Overview
+                        Tổng quan
                     </Link>
                 </li>
                 <li className="profileHeader__menuItem">
@@ -32,7 +32,7 @@ const ProfileHeader = ({ profile }) => {
                         className="profileHeader__menuItem-link"
                         onClick={handleActiveLink}
                     >
-                        Saved
+                        Đã lưu
                     </Link>
                 </li>
                 <li className="profileHeader__menuItem">
@@ -59,7 +59,7 @@ const ProfileHeader = ({ profile }) => {
                         className="profileHeader__menuItem-link"
                         onClick={handleActiveLink}
                     >
-                        Notifications
+                        Thông báo
                     </Link>
                 </li>
             </ul>

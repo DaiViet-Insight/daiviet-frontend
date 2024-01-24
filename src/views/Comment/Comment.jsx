@@ -2,7 +2,7 @@ import React from "react";
 import './Comment.css';
 import { usePost } from "../../contexts/PostContext"
 import { CommentHeader } from "../../components";
-import { CommentMain, FollowLecture } from "../containers";
+import { CommentMain, FollowEvent } from "../containers";
 import { BackToTopButton } from "../../components/Button";
 
 const Comment = () => {
@@ -13,7 +13,7 @@ const Comment = () => {
             <CommentHeader />
             <div className="comment-body">
                 <CommentMain post={post} rootComments={rootComments} />
-                <FollowLecture />
+                <FollowEvent />
             </div>
         </div>
         <BackToTopButton />

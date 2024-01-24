@@ -1,6 +1,6 @@
 import React from "react";
 import './CommentMain.css';
-import { UpVoteButton, DownVoteButton, CommentButton, ShareButton, SavePostButton } from "../../../components/Button";
+import { UpVoteButton, DownVoteButton, CommentButton, SavePostButton } from "../../../components/Button";
 import { CommentInput, CommentList } from "../../../components";
 
 const comments = [
@@ -76,12 +76,11 @@ const CommentMain = ({ post, rootComments }) => {
                         </div>
                         <div className="post-footer">
                             <CommentButton clickEvent={handleCommentBtnClick} />
-                            <ShareButton />
                             <SavePostButton clickEvent={handleSavePostBtnClick} />
                         </div>
 
                         <div className="comment-main__bottom">
-                            <span className="comment-main__bottom-text">Comment as {"Tuanne"}</span>
+                            <span className="comment-main__bottom-text">Bình luận như là {"Tuanne"}</span>
                             {/* Comment input */}
                             <CommentInput isReply={false} commentClickEvent={handleSubmitComment} />
                         </div>

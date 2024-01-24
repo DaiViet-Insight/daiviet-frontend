@@ -3,7 +3,7 @@ import { useState } from "react";
 import ReactQuill from 'react-quill';
 import './CreatePost.css';
 import 'react-quill/dist/quill.snow.css';
-import { FollowLecture } from "../containers";
+import { FollowEvent } from "../containers";
 
 const modules = {
   toolbar: [
@@ -50,13 +50,13 @@ const CreatePost = () => {
         <div className="createPost">
             <div className="createPost-left">
                 <div className="createPost-left__header">
-                    <h1 className="createPost-left__header-heading">Create a post</h1>
+                    <h1 className="createPost-left__header-heading">Tạo bài viết</h1>
                 </div>
                 <div className="createPost-left__body">
                     <div className="createPost-left__body-title">
                         <input 
                             type="text" 
-                            placeholder="Title" 
+                            placeholder="Tiêu đề" 
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
@@ -65,7 +65,7 @@ const CreatePost = () => {
                             theme="snow"
                             modules={modules}
                             className="createPost-left__body-content-editor"
-                            placeholder="Content"
+                            placeholder="Nội dung"
                             onChange={setContent}
                         />
                     </div>
@@ -82,7 +82,7 @@ const CreatePost = () => {
                         ))
                     }
                 </select>
-                <FollowLecture />
+                <FollowEvent />
             </div>
         </div>
     );

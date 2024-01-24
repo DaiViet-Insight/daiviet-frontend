@@ -59,11 +59,11 @@ const ProfileOverview = () => {
                     <div className="profile-overview__right-info">
                         <div className="profile-overview__right-info__posts">
                             <span className="profile-overview__right-info__posts-count">{posts.length}</span>
-                            <span className="profile-overview__right-info__posts-label">posts</span>
+                            <span className="profile-overview__right-info__posts-label">bài viết</span>
                         </div>
                         <div className="profile-overview__right-info__comments">
                             <span className="profile-overview__right-info__comments-count">10</span>
-                            <span className="profile-overview__right-info__comments-label">comments</span>
+                            <span className="profile-overview__right-info__comments-label">bình luận</span>
                         </div>
                     </div>
                 </div>
