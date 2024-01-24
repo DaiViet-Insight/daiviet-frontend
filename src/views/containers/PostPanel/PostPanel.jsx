@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import './PostPanel.css';
-import { UpVoteButton, DownVoteButton, CommentButton, ShareButton, SavePostButton } from "../../../components/Button";
+import { UpVoteButton, DownVoteButton, CommentButton, SavePostButton } from "../../../components/Button";
 
 const PostPanel = ({ post }) => {
     const navigate = useNavigate();

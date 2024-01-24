@@ -8,5 +8,8 @@ import CommentItem from './CommentItem/CommentItem';
 import CommentInput from './CommentInput/CommentInput';
 import PostSkeleton from './PostSkeleton/PostSkeleton';
 import ProfilePanel from './ProfilePanel/ProfilePanel';
+import SearchBar from './SearchBar/SearchBar';
+import LectureItemThumb from './LectureItemThumb/LectureItemThumb';
 
-export { ToolStripProfile, CreatePostPanel, FilterPosts, QuickAccess, CommentHeader, CommentList, CommentItem, CommentInput, PostSkeleton, ProfilePanel };
+export { ToolStripProfile, CreatePostPanel, FilterPosts, QuickAccess, CommentHeader, CommentList, CommentItem, CommentInput, PostSkeleton, ProfilePanel, SearchBar };
+export { LectureItemThumb }

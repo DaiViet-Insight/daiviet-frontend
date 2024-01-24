@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Lecture from "./views/Lecture/Lecture";
 import Blog from "./views/Blog/Blog";
 import CreatePost from "./views/CreatePost/CreatePost";
 import Comment from "./views/Comment/Comment";
@@ -19,6 +20,7 @@ function App() {
     <Router basename="/reddit-blog-clone">
       {isPageNotFound ? null : <Navbar />}
       <Routes>
+        <Route path="/lectures" element={<Lecture />} />
         <Route path="/posts" element={<Blog />} />
         <Route path="/posts/create" element={<CreatePost />} />
         <Route 
