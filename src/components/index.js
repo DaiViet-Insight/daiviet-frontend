@@ -10,6 +10,7 @@ import PostSkeleton from './PostSkeleton/PostSkeleton';
 import ProfilePanel from './ProfilePanel/ProfilePanel';
 import SearchBar from './SearchBar/SearchBar';
 import LectureItemThumb from './LectureItemThumb/LectureItemThumb';
+import RelatedLecture from './RelatedLecture/RelatedLecture';
 
 export { ToolStripProfile, CreatePostPanel, FilterPosts, QuickAccess, CommentHeader, CommentList, CommentItem, CommentInput, PostSkeleton, ProfilePanel, SearchBar };
-export { LectureItemThumb }
+export { LectureItemThumb, RelatedLecture }

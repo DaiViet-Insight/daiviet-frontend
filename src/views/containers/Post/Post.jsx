@@ -15,7 +15,7 @@ const Post = ({ post }) => {
     }
 
     const handleCommentBtnClick = () => {
-        navigate("/comments/" + post.id);
+        navigate(`${post.id}/comments`);
     }
 
     const handleSavePostBtnClick = () => {
