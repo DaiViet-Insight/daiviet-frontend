@@ -213,9 +213,6 @@ const CreatePost = () => {
             <div className="createPost-right">
                 <SearchBarEvent events={events} />
             </div>
-            <div className="createPost-left__body-footer">
-                <button className="createPost-left__body-footer-btn" onClick={handleSubmitCreatePost}>Post</button>
-            </div>
         </div>
     );
 }
