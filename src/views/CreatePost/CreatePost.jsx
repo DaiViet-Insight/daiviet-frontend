@@ -3,7 +3,7 @@ import { useState } from "react";
 import ReactQuill from 'react-quill';
 import './CreatePost.css';
 import 'react-quill/dist/quill.snow.css';
-import { FollowEvent } from "../containers";
+import { SearchBarEvent, EventAttach } from "../../components";
 
 const modules = {
   toolbar: [
@@ -21,18 +21,46 @@ const modules = {
   ],
 }
 
-const lectures = [
+const events = [
     {
         id: 1,
-        name: "Chiến thắng Điện Biên Phủ 1954"
+        name: "Triều đại Hồng Bàng"
     },
     {
         id: 2,
-        name: "Lecture 2"
+        name: "Triều đại nhà Lý"
     },
     {
         id: 3,
-        name: "Lecture 3"
+        name: "Triều đại nhà Trần"
+    },
+    {
+        id: 4,
+        name: "Triều đại nhà Lê"
+    }, 
+    {
+        id: 5,
+        name: "Triều đại nhà Nguyễn"
+    },
+    {
+        id: 6,
+        name: "Triều đại nhà Tây Sơn"
+    },
+    {
+        id: 7,
+        name: "Triều đại nhà Mạc"
+    },
+    {
+        id: 8,
+        name: "Triều đại nhà Hồ"
+    },
+    {
+        id: 9,
+        name: "Triều đại nhà Tống"
+    },
+    {
+        id: 10,
+        name: "Triều đại nhà Minh"
     }
 ];
 
@@ -44,6 +72,10 @@ const CreatePost = () => {
         console.log("Create post");
         console.log("Title:" + title);
         console.log("Content:" + content);
+    }
+
+    const handleRemoveEventAttach = (id) => {
+        console.log("Remove event attach with id: " + id);
     }
 
     return (
@@ -60,6 +92,13 @@ const CreatePost = () => {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
+                    <div className="createPost-left__body-eventAttach">
+                        {
+                            events.map((event) => (
+                                <EventAttach event={event} key={event.id} onRemoveClick={handleRemoveEventAttach} />
+                            ))
+                        }
+                    </div>
                     <div className="createPost-left__body-content">
                         <ReactQuill 
                             theme="snow"
@@ -75,14 +114,7 @@ const CreatePost = () => {
                 </div>
             </div>
             <div className="createPost-right">
-                <select className="createPost-right__select">
-                    {
-                        lectures.map((lecture) => (
-                            <option key={lecture.id} value={lecture.id} className="createPost-right__option">{lecture.name}</option>
-                        ))
-                    }
-                </select>
-                <FollowEvent />
+                <SearchBarEvent events={events} />
             </div>
         </div>
     );
