@@ -67,9 +67,16 @@ strong {
     border-radius: 5px;
 }
 
+.createPost-left__body-eventAttach {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 /* Content */
 
 .createPost-left__body-content-editor {
+    margin-top: 20px;
     overflow-y: auto; /* Add vertical scrolling when the content exceeds the height */
 }
 

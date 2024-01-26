@@ -1,0 +1,29 @@
+.eventAttach {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px 4px 2px 8px;
+    border-radius: 999px;
+    background-color: #ddd;
+}
+
+.eventAttach__name {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.eventAttach__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+.eventAttach__btn:hover {
+    background-color: #ffffff;
+}
