@@ -1,6 +1,6 @@
 import React from "react";
 import './Post.css';
-import { UpVoteButton, DownVoteButton, CommentButton , ShareButton, SavePostButton } from "../../../components/Button";
+import { UpVoteButton, DownVoteButton, CommentButton, SavePostButton } from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 const Post = ({ post }) => {
@@ -15,7 +15,7 @@ const Post = ({ post }) => {
     }
 
     const handleCommentBtnClick = () => {
-        navigate("/comments/" + post.id);
+        navigate(`${post.id}/comments`);
     }
 
     const handleSavePostBtnClick = () => {
@@ -44,7 +44,6 @@ const Post = ({ post }) => {
                 </div>
                 <div className="post-footer">
                     <CommentButton clickEvent={handleCommentBtnClick} />
-                    <ShareButton />
                     <SavePostButton clickEvent={handleSavePostBtnClick} />
                 </div>
             </div>

@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import './Navbar.css';
 import logo from '../../../assets/images/Reddit-Logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { ToolStripProfile } from "../../../components";
+import { SearchBar, ToolStripProfile } from "../../../components";
 import { NotificationPanel } from "../../containers";
 
 const Navbar = () => {
@@ -52,16 +51,21 @@ const Navbar = () => {
         setIsShowNotificationPanel(!isShowNotificationPanel);
     }
 
+    const dataSearchBar = [
+        "Tìm kiếm 1",
+        "Tìm kiếm 2",
+        "Tìm kiếm 3",
+        "Tìm kiếm 4",
+        "Tìm kiếm 5"
+    ];
+
     return (
         <div className="navbar">
-            <Link to="/posts" className="navbar-logo-link">
+            <Link to="/lectures" className="navbar-logo-link">
                 <img src={logo} alt="logo" className="navbar-logo" />
             </Link>
             <div className="navbar-search-form">
-                <label htmlFor="navbar-search" className="navbar-search__label">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className="navbar-search-label__icon" />
-                </label>
-                <input type="text" id="navbar-search" className="navbar-search__input" placeholder="Search Reddit" />
+                <SearchBar inputPlaceholder={"Tìm kiếm"} data={dataSearchBar} />
             </div>
             <ul className="navbar-list">
                 <li className="navbar-item navbar-item__notification">

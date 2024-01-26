@@ -16,17 +16,17 @@ const ToolStripProfile = ({ username , isShow, clickEvent }) => {
                 <li className="ToolStripProfile-item">
                     <span className="ToolStripProfile-item__title">
                         <FontAwesomeIcon icon={faCircleUser} />
-                        My Stuff
+                        Thông tin cá nhân
                     </span>
                     <ul className="ToolStripProfile-item__subitem-list">
-                        <Link to={"/profile/" + username} className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>Profile</Link>
-                        <Link to="/settings" className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>User Settings</Link>
+                        <Link to={"/profile/" + username} className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>Cá nhân</Link>
+                        <Link to="/settings" className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>Cài đặt tài khoản</Link>
                     </ul>
                 </li>
                 <li>
                     <Link to="/logout" className="ToolStripProfile-item__title" onClick={clickEvent}>
                         <FontAwesomeIcon icon={faArrowRightFromBracket} />
-                        Logout
+                        Đăng xuất
                     </Link>
                 </li>
             </ul>

@@ -25,7 +25,7 @@ const DownvotedPost = () => {
                             null
                         :
                         <div className="downvoted-post__left-no-posts">
-                            <h2 className="downvoted-post__left-no-posts__title">hmm... looks like you haven't downvoted anything yet</h2>
+                            <h2 className="downvoted-post__left-no-posts__title">hmm... Bạn chưa downvote bài viết nào</h2>
                         </div>
                     }
                 </div>

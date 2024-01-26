@@ -12,15 +12,15 @@ const ProfilePanel = () => {
             <div className="profile-panel__name">Tuan Tran</div>
             <div className="profile-panel__username">u/tuantran</div>
             <div className="profile-panel__birthday">
-                <span className="profile-panel__birthday-title">Birthday:</span>
+                <span className="profile-panel__birthday-title">Ngày sinh: </span>
                 <span className="profile-panel__birthday-value">01/01/2003</span>
             </div>
             <div className="profile-panel__actions">
                 <Link to="/profile/settings" className="profile-panel__button">
-                    Edit profile
+                    Cài đặt tài khoản
                 </Link>
                 <Link to="../../posts/create" className="profile-panel__button">
-                    New Post
+                    Tạo bài viết
                 </Link>
             </div>
         </div>

@@ -10,15 +10,15 @@ const QuickAccess = () => {
             <div className="quick-access__content">
                 <div className="quick-access__content__title">
                     <img src={Flag} alt="" className="quick-access__content-flag" />
-                    Home
+                    Trang bài viết
                 </div>
                 <div className="quick-access__content__subtitle">
-                    Your personal Reddit frontpage. Come here to check in with your favorite communities.
+                    Đây là nơi bạn có thể khám phá những điều thú vị xung quanh về các sự kiện lịch sử.
                 </div>
             </div>
             <div className="quick-access__links">
-                <Link to="./posts/create" className="quick-access__link quick-access__link-createPost">Create Post</Link>
-                <Link to="./createCommunity" className="quick-access__link quick-access__link-createCommunity">Create Community</Link>
+                <Link to="./create" className="quick-access__link quick-access__link-createPost">Tạo bài viết</Link>
+                {/* <Link to="./createCommunity" className="quick-access__link quick-access__link-createCommunity">Create Community</Link> */}
             </div>
         </div>
     );

@@ -52,7 +52,7 @@ const NotificationPanel = ({ isShow, clickEvent }) => {
         }
     >
         <div className="notification-panel__header">
-            <h2 className="notification-panel__header-title">Notifications</h2>
+            <h2 className="notification-panel__header-title">Thông báo</h2>
             <Link to="/settings" className="notification-panel__header__link" onClick={clickEvent}>
                 <FontAwesomeIcon icon={faGear} />
             </Link>
@@ -83,7 +83,7 @@ const NotificationPanel = ({ isShow, clickEvent }) => {
             </div>
         </div>
         <div className="notification-panel__footer">
-            <Link to="/profile/tuanne/notifications" className="notification-panel__footer__link" onClick={clickEvent}>SEE ALL</Link>
+            <Link to="/profile/tuanne/notifications" className="notification-panel__footer__link" onClick={clickEvent}>Xem tất cả</Link>
         </div>
     </div>
 );
