@@ -8,7 +8,6 @@ import { FollowEvent } from "../containers";
 
 
 
-
 const lectures = [
     {
         id: 1,
@@ -41,8 +40,32 @@ const uploadToCloudinary = async (file) => {
 
 const CreatePost = () => {
     const reactQuillRef = useRef(null);
- 
-
+    
+    const clipboardHandler = useCallback(async (e) => {
+    //handle paste image
+    //if image is pasted delete the current selection and insert the image
+    
+    const clipboardData = e.clipboardData;
+    if (clipboardData) {
+        const items = clipboardData.items;
+        if (!items) return;
+        for (const item of items) {
+            if (item.type.indexOf("image") !== -1) {
+                e.preventDefault();
+                const file = item.getAsFile();
+                if (file) {
+                    const imageUrl = await  uploadToCloudinary(file);
+                    const quill = reactQuillRef.current;
+                    if (quill) {
+                        const range = quill.getEditorSelection();
+                        range && quill.getEditor().insertEmbed(range.index, "image", imageUrl);
+                    }
+                }
+            }
+        }
+    }
+      
+    }, []);
 
     const imageHandler = useCallback(() => {
         const input = document.createElement("input");
@@ -134,7 +157,7 @@ const CreatePost = () => {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
-                    <div className="createPost-left__body-content">
+                    <div onPaste = {clipboardHandler} className="createPost-left__body-content">
                         <ReactQuill
                             ref={reactQuillRef}
                             theme="snow"
@@ -143,6 +166,7 @@ const CreatePost = () => {
                             className="createPost-left__body-content-editor"
                             placeholder="Nội dung"
                             onChange={setContent}
+                            
                         />
                     </div>
                     <div className="createPost-left__body-footer">
