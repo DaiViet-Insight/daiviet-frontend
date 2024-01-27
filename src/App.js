@@ -6,6 +6,7 @@ import Blog from "./views/Blog/Blog";
 import CreatePost from "./views/CreatePost/CreatePost";
 import Comment from "./views/Comment/Comment";
 import Navbar from "./views/containers/Navbar/Navbar";
+import ModSite from "./views/ModSite/ModSite";
 import Profile from "./views/Profile/Profile";
 import NotFound from "./views/NotFound/NotFound";
 import { PostProvider } from "./contexts/PostContext";
@@ -25,6 +26,7 @@ function App() {
         <Route path="/lectures/:id" element={<LectureDetail />} />
         <Route path="/posts" element={<Blog />} />
         <Route path="/posts/create" element={<CreatePost />} />
+        <Route path="/mod" element={<ModSite />} />
         <Route 
           path="posts/:id/comments" 
           element={
