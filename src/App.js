@@ -10,7 +10,7 @@ import Navbar from "./views/containers/Navbar/Navbar";
 import Profile from "./views/Profile/Profile";
 import NotFound from "./views/NotFound/NotFound";
 import { PostProvider } from "./contexts/PostContext";
-import { AuthenticationForm } from "./views/containers";
+import { AuthenticationForm, ChatBox } from "./views/containers";
 
 import { UserProvider } from "./contexts/UserContext";
 
@@ -44,6 +44,9 @@ function App() {
           <AuthenticationForm />
         </div>
       </UserProvider>
+      <div className="rootChatBox">
+        <ChatBox />
+      </div>
     </Router>
   );
 }

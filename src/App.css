@@ -46,3 +46,10 @@
   height: 100vh;
   z-index: 999;
 }
+
+.rootChatBox {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  z-index: 101;
+}
