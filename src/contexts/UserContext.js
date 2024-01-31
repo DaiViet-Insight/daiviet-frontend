@@ -7,7 +7,7 @@ export function useUser() {
     return useContext(UserContext)
 }
 
-export function UserProvider({ children }) {
+export function UserProvider({ children, model }) {
     const [isShowAuthModal, setIsShowAuthModal] = useState(false);
     const [user, setUser] = useState(null)
 
@@ -30,7 +30,12 @@ export function UserProvider({ children }) {
             }}
         >
         {
-            isShowAuthModal && children
+            children
+        }
+        {
+            isShowAuthModal && (
+                model
+            )
         }
         </UserContext.Provider>
     );

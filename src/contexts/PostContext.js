@@ -2,7 +2,7 @@ import React from "react";
 import { useContext, useMemo, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAsync } from "../hooks/useAsync";
-import { getPost } from "../services/posts";
+import { getPost, getRootCommentOfPost } from "../services/posts";
 
 const PostContext = React.createContext();
 
@@ -11,9 +11,23 @@ export function usePost() {
 }
 
 export function PostProvider({ children }) {
-    const { id : postId } = useParams();
+    const { id: postId } = useParams();
     const { data: post, loading, error } = useAsync(() => getPost(postId), [postId]);
+    const { data: commentsFetch, loading: loadingComments, error: errorComments } = useAsync(() => getRootCommentOfPost(postId), [postId]);
     const [comments, setComments] = useState([])
+    useEffect(() => {
+        let listComments = [];
+        for (let i = 0; i < commentsFetch?.length; i++) {
+            const comment = {
+                parentId: commentsFetch[i].rootCommentId,
+                id: commentsFetch[i].id,
+                content: commentsFetch[i].content,
+            };
+            listComments = [...listComments, comment];
+        }
+        setComments(listComments);
+    }, [loadingComments]); // Run this effect when commentsFetch changes
+
     const commentsByParentId = useMemo(() => {
         const group = {}
         comments.forEach(comment => {
@@ -31,16 +45,16 @@ export function PostProvider({ children }) {
     const getReplies = (parentId) => {
         return commentsByParentId[parentId]
     }
-    
+
     return (
-        <PostContext.Provider 
-            value={{ 
-                post: {postId, ...post},
+        <PostContext.Provider
+            value={{
+                post: { postId, ...post },
                 rootComments: commentsByParentId[null],
                 getReplies,
             }}
         >
-        {children}
+            {children}
         </PostContext.Provider>
     );
 }

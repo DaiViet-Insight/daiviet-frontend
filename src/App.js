@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Lecture from "./views/Lecture/Lecture";
+import LectureCreate from "./views/LectureCreate/LectureCreate";
 import LectureDetail from "./views/LectureDetail/LectureDetail";
 import Blog from "./views/Blog/Blog";
 import CreatePost from "./views/CreatePost/CreatePost";
@@ -24,27 +25,29 @@ function App() {
 
   return (
     <Router basename="/reddit-blog-clone">
-      {isPageNotFound ? null : <Navbar />}
-      <Routes>
-        <Route path="/lectures" element={<Lecture />} />
-        <Route path="/lectures/:id" element={<LectureDetail />} />
-        <Route path="/posts" element={<Blog />} />
-        <Route path="/posts/create" element={<CreatePost />} />
-        <Route path="/mod" element={<ModSite />} />
-        <Route 
-          path="posts/:id/comments" 
-          element={
-            <PostProvider>
-              <Comment />
-            </PostProvider>
-          } />
-        <Route path="/profile/*" element={<Profile />} />
-        <Route path="*" element={<NotFound setIsPageNotFound={handleSetIsPageNotFound} />} />
-      </Routes>
-      <UserProvider>
+      <UserProvider model={
         <div className="rootAuthenticationForm">
           <AuthenticationForm />
         </div>
+      }>
+        {isPageNotFound ? null : <Navbar />}
+        <Routes>
+          <Route path="/lectures" element={<Lecture />} />
+          <Route path="/lectures/create" element={<LectureCreate />} />
+          <Route path="/lectures/:id" element={<LectureDetail />} />
+          <Route path="/posts" element={<Blog />} />
+          <Route path="/posts/create" element={<CreatePost />} />
+          <Route path="/mod" element={<ModSite />} />
+          <Route
+            path="posts/:id/comments"
+            element={
+              <PostProvider>
+                <Comment />
+              </PostProvider>
+            } />
+          <Route path="/profile/*" element={<Profile />} />
+          <Route path="*" element={<NotFound setIsPageNotFound={handleSetIsPageNotFound} />} />
+        </Routes>
       </UserProvider>
       <div className="rootChatBox">
         <ChatBox />
