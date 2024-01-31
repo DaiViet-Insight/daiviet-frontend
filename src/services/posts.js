@@ -5,9 +5,14 @@ export function getPosts() {
 }
 
 export function getPost(postId) {
-    return makeRequest(`/posts/${postId}`);
+    try {
+        return makeRequest(`api/posts/${postId}`);
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 export function getRootCommentOfPost(postId) {
-    return makeRequest(`/posts/${postId}/comments`);
+    return makeRequest(`api/posts/${postId}/comments`);
 }

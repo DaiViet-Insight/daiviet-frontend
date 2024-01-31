@@ -22,6 +22,29 @@ const AuthenticationForm = () => {
         setIsShowing(true);
     }, []);
 
+    const handleSubmitLogin = async () => {
+        try {
+            const response = await fetch("http://20.236.83.109:3000/api/users/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            });
+            const data = await response.json();
+            if (data.message === "Auth successful") {
+                localStorage.setItem("token", data.token);
+                setIsShowAuthModal(false);
+            }
+        }
+        catch (error) {
+            console.log("error", error);
+        }
+    }
+
     return (
         <div className="authentication-form-container">
             <div 
@@ -54,7 +77,10 @@ const AuthenticationForm = () => {
                     <div className="authentication-form__btn-forgotPass">
                         <button>Quên mật khẩu?</button>
                     </div>
-                    <button className="authentication-form__button">Đăng nhập</button>
+                    <button 
+                        className="authentication-form__button"
+                        onClick={() => {handleSubmitLogin()}}
+                    >Đăng nhập</button>
                     <div className="authentication-form__action">
                         <span>Chưa có tài khoản?</span>
                         <button

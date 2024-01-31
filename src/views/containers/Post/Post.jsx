@@ -40,7 +40,9 @@ const Post = ({ post }) => {
                 </div>
                 <div className="post-body">
                     <h2 className="post-body__title">{post.title}</h2>
-                    <p className="post-body__subscription">{post.subscription}</p>
+                    <p className="post-body__subscription"
+                        dangerouslySetInnerHTML={{ __html: post.subscription }}
+                    ></p>
                 </div>
                 <div className="post-footer">
                     <CommentButton clickEvent={handleCommentBtnClick} />
