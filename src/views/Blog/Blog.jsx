@@ -9,11 +9,13 @@ import Post from "../containers/Post/Post";
 const Blog = () => {
     const { setIsShowAuthModal } = useUser();
     const [posts, setPosts] = useState([]);
+    const [filter, setFilter] = useState("new");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("http://20.236.83.109:3000/api/posts?type=new&size=10", 
+                const filterQuery = filter ? `type=${filter}` : 'type=new';
+                const response = await fetch(`http://20.236.83.109:3000/api/posts?${filterQuery}&size=10`, 
                     {
                         method: "GET",
                         headers: {
@@ -27,7 +29,10 @@ const Blog = () => {
                     return;
                 }
                 const data = await response.json();
-                console.log(data);
+                setPosts([]);
+                if (data.length === 0) {
+                    return;
+                }
                 data.forEach((item) => {
                     const post = {
                         id: item.id,
@@ -48,13 +53,17 @@ const Blog = () => {
             }
         }
         fetchData();
-    }, []);
+    }, [filter]);
+
+    const handleFilterPostsChange = (filter) => {
+        setFilter(filter);
+    }
 
     return (
         <div className="blog">
             <div className="blog-left">
                 <CreatePostPanel />
-                <FilterPosts />
+                <FilterPosts type={filter} onFilterPostsChange={handleFilterPostsChange} />
                 <div className="posts">
                     {posts.map((post) => (<Post key={post.id} post={post}/>))}
                 </div>
