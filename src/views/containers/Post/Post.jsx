@@ -1,13 +1,42 @@
 import React from "react";
+import { useState } from "react";
 import './Post.css';
 import { UpVoteButton, DownVoteButton, CommentButton, SavePostButton } from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
+const { useUser } = require("../../../contexts/UserContext"); 
+
 const Post = ({ post }) => {
     const navigate = useNavigate();
+    const { setIsShowAuthModal } = useUser();
+    const [currentUserUpvoted, setCurrentUserUpvoted] = useState(post.currentUserUpvoted);
+    const [currentUserDownvoted, setCurrentUserDownvoted] = useState(post.currentUserDownvoted);
+    
 
     const handleUpVote = () => {
-        console.log("Up Vote");
+        const upVote = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API}/posts/${post.id}/upvote`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                });
+
+                if (response.status === 401) {
+                    setIsShowAuthModal(true);
+                    return;
+                }
+
+                if (response.status === 200) {
+                    setCurrentUserUpvoted(true);
+                }
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
     };
 
     const handleDownVote = () => {
@@ -25,8 +54,8 @@ const Post = ({ post }) => {
     return (
         <div className="post">
             <div className="post-left">
-                <UpVoteButton upVote={handleUpVote} />
-                <span className="post-votes">0</span>
+                <UpVoteButton upVote={handleUpVote} currentUserUpvoted={currentUserUpvoted} />
+                <span className="post-votes">{post.voteCount ?? 0}</span>
                 <DownVoteButton downVote={handleDownVote} />
             </div>
             <div className="post-right">
@@ -34,7 +63,7 @@ const Post = ({ post }) => {
                     <span className="post-header-id" hidden>#{post.id}</span>
                     <span className="post-header-author">
                         <img src={post.avatar} className="post-header__author-avatar" alt="Author" />
-                        <span className="post-header__author-username">{post.username}</span>
+                        <span className="post-header__author-username">{post.fullname}</span>
                     </span>
                     <span className="post-header-date">{post.creationDate}</span>
                 </div>
