@@ -24,5 +24,11 @@
 }
 
 .filter-posts-link:hover {
-    background-color: #f6f7f8;
+    background-color: #0079d3;
+    color: #fff;
+}
+
+.filter-posts-link--active {
+    background-color: #0079d3;
+    color: #fff;
 }
