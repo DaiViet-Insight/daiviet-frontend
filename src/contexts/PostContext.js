@@ -28,6 +28,7 @@ export function PostProvider({ children }) {
             listComments = [...listComments, comment];
         }
         setComments(listComments);
+        console.log(listComments);
     }, [loadingComments]); // Run this effect when commentsFetch changes
 
     const commentsByParentId = useMemo(() => {
@@ -48,12 +49,19 @@ export function PostProvider({ children }) {
         return commentsByParentId[parentId]
     }
 
+    function createLocalComment(comment) {
+        setComments(prevComments => {
+          return [comment, ...prevComments]
+        })
+      }
+
     return (
         <PostContext.Provider
             value={{
                 post: { postId, ...post },
                 rootComments: commentsByParentId[null],
                 getReplies,
+                createLocalComment,
             }}
         >
             {children}

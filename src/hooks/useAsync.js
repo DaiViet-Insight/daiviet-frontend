@@ -10,6 +10,10 @@ export function useAsync(func, dependencies) {
     return state
 }
 
+export function useAsyncFn(func, dependencies = []) {
+    return useAsyncInternal(func, dependencies, false)
+}
+
 export function useAsyncNoLoading(func, dependencies) {
     return useAsyncInternal(func, dependencies, false)
 }

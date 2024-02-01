@@ -2,35 +2,13 @@ import React from "react";
 import './CommentMain.css';
 import { UpVoteButton, DownVoteButton, CommentButton, SavePostButton } from "../../../components/Button";
 import { CommentInput, CommentList } from "../../../components";
+import { useAsyncFn } from "../../../hooks/useAsync.js";
+import { createComment } from "../../../services/comments.js";
 
-const comments = [
-    {
-        id: 1,
-        avatar: "https://b.thumbs.redditmedia.com/J_fCwTYJkoM-way-eaOHv8AOHoF_jNXNqOvPrQ7bINY.png",
-        username: "Author",
-        creationDate: "2024-01-01",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, elit quis efficitur tincidunt, sem sem sodales libero, nec tincidunt ipsum velit eu sem. Duis ac metus ac nisl ultricies varius. Cras nec semper magna. Nullam euismod nisl et nunc lacinia, eu lacinia ipsum ultrices. Sed sit amet semper nisl. Nullam eget semper nisl. Nulla facilisi. Nulla facilisi. Donec id semper magna. Nulla facilisi. Nulla facilisi. Donec id semper magna.",
-        votes: 0
-    },
-    {
-        id: 2,
-        avatar: "https://b.thumbs.redditmedia.com/J_fCwTYJkoM-way-eaOHv8AOHoF_jNXNqOvPrQ7bINY.png",
-        username: "Author",
-        creationDate: "2024-01-01",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, elit quis efficitur tincidunt, sem sem sodales libero, nec tincidunt ipsum velit eu sem. Duis ac metus ac nisl ultricies varius. Cras nec semper magna. Nullam euismod nisl et nunc lacinia, eu lacinia ipsum ultrices. Sed sit amet semper nisl. Nullam eget semper nisl. Nulla facilisi. Nulla facilisi. Donec id semper magna. Nulla facilisi. Nulla facilisi. Donec id semper magna.",
-        votes: 4
-    },
-    {
-        id: 3,
-        avatar: "https://b.thumbs.redditmedia.com/J_fCwTYJkoM-way-eaOHv8AOHoF_jNXNqOvPrQ7bINY.png",
-        username: "Author",
-        creationDate: "2024-01-01",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, elit quis efficitur tincidunt, sem sem sodales libero, nec tincidunt ipsum velit eu sem. Duis ac metus ac nisl ultricies varius. Cras nec semper magna. Nullam euismod nisl et nunc lacinia, eu lacinia ipsum ultrices. Sed sit amet semper nisl. Nullam eget semper nisl. Nulla facilisi. Nulla facilisi. Donec id semper magna. Nulla facilisi. Nulla facilisi. Donec id semper magna.",
-        votes: 2
-    }
-];
+const { usePost } = require("../../../contexts/PostContext");
 
 const CommentMain = ({ post, rootComments }) => {
+    const { createLocalComment } = usePost();
     const handleUpVote = () => {
         console.log("upvote");
     }
@@ -47,8 +25,23 @@ const CommentMain = ({ post, rootComments }) => {
         console.log("save");
     }
 
+    const createCommentFn = useAsyncFn(createComment);
+
     const handleSubmitComment = (content) => {
-        console.log(content);
+        return createCommentFn
+            .execute({ postId: post.id, content, parentId: null })
+            .then(result => {
+                if (result === "Tạo comment thành công !!!") {
+                    createLocalComment({
+                        parentId: post.id,
+                        currentUserDownvoted: false,
+                        currentUserUpvoted: false,
+                        downvotesCount: 0,
+                        fullname: "Tran Tuan",
+                        content: content,
+                    })
+                }
+            })
     }
 
     return (
