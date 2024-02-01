@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import './CommentHeader.css';
 import { UpVoteButton, DownVoteButton, CloseButton } from "../Button";
 
-const CommentHeader = ({ post }) => {
+const CommentHeader = ({ post, onUpvotePost, onDownvotePost, voteCount, currentUserUpvoted, currentUserDownvoted }) => {
     const navigate = useNavigate();
     const handleUpVote = () => {
-        console.log("upvote");
+        onUpvotePost(post.id);
     }
 
     const handleDownVote = () => {
-        console.log("downvote");
+        onDownvotePost(post.id);
     }
 
     const handleCloseBtn = () => {
@@ -27,8 +27,9 @@ const CommentHeader = ({ post }) => {
                     }
                 }
                 upVote={handleUpVote}
+                currentUserUpvoted={currentUserUpvoted}
             />
-            <span className="comment-post-votes">{post.voteCount}</span>
+            <span className="comment-post-votes">{voteCount}</span>
             <DownVoteButton 
                 props={
                     {
@@ -37,6 +38,7 @@ const CommentHeader = ({ post }) => {
                     }
                 } 
                 downVote={handleDownVote}
+                currentUserDownvoted={currentUserDownvoted}
             />
         </div>
         <h2 className="comment-post-title">{post.title}</h2>

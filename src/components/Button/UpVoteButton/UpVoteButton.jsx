@@ -11,7 +11,7 @@ const UpVoteButton = ({idPost, props, upVote, currentUserUpvoted}) => {
 
     // Kiểm tra nếu currentUserUpvoted là true thì thay đổi màu của biểu tượng
     if (currentUserUpvoted) {
-        strokeColor = "#ff0000"; // Màu đỏ hoặc màu khác tùy bạn chọn
+        strokeColor = "#cc3700"; // Màu đỏ hoặc màu khác tùy bạn chọn
     }
 
     return (
