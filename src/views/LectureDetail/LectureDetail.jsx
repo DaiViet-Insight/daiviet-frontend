@@ -89,14 +89,16 @@ const LectureDetail = () => {
                         Diễn đàn
                     </Link>
                 </div>
-                <div className="lecture-detail__content">
-                    {lectureDetail.content}
+                <div 
+                    className="lecture-detail__content"
+                    dangerouslySetInnerHTML={{ __html: lectureDetail.content }}
+                >
                 </div>
                 <div className="lecture-detail__hot-post">
                     <h2 className="lecture-detail__hot-post__heading">Bài viết nổi bật</h2>
                     <div className="lecture-detail__hot-post__list">
                         {hotPosts.map((post) => (
-                            <div className="lecture-detail__hot-post__item">
+                            <div className="lecture-detail__hot-post__item" key={post.id}>
                                 <Link to={"/posts/" + post.id + "/comments"} className="lecture-detail__hot-post__item-link">
                                     {post.title}
                                 </Link>
@@ -109,8 +111,8 @@ const LectureDetail = () => {
                 <div className="lecture-detail__relatedVideo">
                     <h2 className="lecture-detail__relatedVideo-heading">Bài giảng liên quan</h2>
                     <div className="lecture-detail__relatedVideo-list">
-                        {relatedLectures.map((lecture) => (
-                            <RelatedLecture lecture={lecture} />
+                        {relatedLectures.map((lecture, index) => (
+                            <RelatedLecture lecture={lecture} key={index} />
                         ))}
                         <button className="lecture-detail__relatedVideo-btn">Xem thêm</button>
                     </div>
