@@ -7,14 +7,14 @@ import { createComment } from "../../../services/comments.js";
 
 const { usePost } = require("../../../contexts/PostContext");
 
-const CommentMain = ({ post, rootComments }) => {
+const CommentMain = ({ post, rootComments, onUpvotePost, onDownvotePost, voteCount, currentUserUpvoted, currentUserDownvoted }) => {
     const { createLocalComment } = usePost();
     const handleUpVote = () => {
-        console.log("upvote");
+        onUpvotePost(post.id);
     }
 
     const handleDownVote = () => {
-        console.log("downvote");
+        onDownvotePost(post.id);
     }
 
     const handleCommentBtnClick = () => {
@@ -49,9 +49,9 @@ const CommentMain = ({ post, rootComments }) => {
             <div className="comment-main-border">
                 <div className="comment-main__top">
                     <div className="comment-main__left">
-                        <UpVoteButton upVote={handleUpVote} />
-                        <span className="comment-main__votes">{post.voteCount}</span>
-                        <DownVoteButton downVote={handleDownVote} />
+                        <UpVoteButton upVote={handleUpVote} currentUserUpvoted={currentUserUpvoted} />
+                        <span className="comment-main__votes">{voteCount}</span>
+                        <DownVoteButton downVote={handleDownVote} currentUserDownvoted={currentUserDownvoted} />
                     </div>
                     <div className="comment-main__right">
                         <div className="post-header">
