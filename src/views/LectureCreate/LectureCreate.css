@@ -53,11 +53,13 @@ strong {
     border-radius: 5px;
 }
 
-.lectureCreate-left__body-title {
+.lectureCreate-left__body-title,
+.lectureCreate-left__body-videoURL {
     margin-bottom: 20px;
 }
 
-.lectureCreate-left__body-title input {
+.lectureCreate-left__body-title input,
+.lectureCreate-left__body-videoURL input {
     width: 100%;
     padding: 10px;
     font-size: 1.5rem;
@@ -65,6 +67,15 @@ strong {
     border: 1px solid #ccc;
     outline: none;
     border-radius: 5px;
+}
+
+.lectureCreate-left__body-thumbnail {
+    margin-bottom: 10px;
+}
+
+.lectureCreate-left__body-thumbnail-label {
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .lectureCreate-left__body-eventAttach {

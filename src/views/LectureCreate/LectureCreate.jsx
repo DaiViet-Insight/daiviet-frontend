@@ -146,24 +146,66 @@ const LectureCreate = () => {
     }
 
     const [title, setTitle] = useState("");
+    const [videoURL, setVideoURL] = useState("");
     const [thumbnail, setThumbnail] = useState("");
     const [content, setContent] = useState("");
 
     const handleSetThumbnail = async (event) => {
         const file = event.target.files[0];
-        console.log(file)
         const imageUrl = await uploadToCloudinary(file);
-        console.log(imageUrl);
+        setThumbnail(imageUrl);
     }
 
     const handleSubmitLectureCreate = async () => {
-        console.log("Create post");
+        console.log("Create lecture");
         console.log("Title:" + title);
+        console.log("Video URL:" + videoURL);
         console.log("Content:" + content);
         console.log("Event attach:" + eventAttach.map((event) => event.id));
-        const thumbnailStream = document.getElementById('thumbnail').target.files[0];
-        const imageUrl = await uploadToCloudinary(thumbnailStream);
-        console.log(imageUrl);
+        console.log("Thumbnail:" + thumbnail);
+
+        if (!title || !videoURL || !content || !thumbnail) {
+            alert("Vui lòng nhập đầy đủ thông tin");
+            return;
+        }
+
+        const token = localStorage.getItem("token");
+        if (!token) {
+            setIsShowAuthModal(true);
+            return;
+        }
+
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API}/api/lectures`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                        videoURL: videoURL,
+                        content: content,
+                        eventIds: eventAttach.map((event) => event.id),
+                        thumbnail: thumbnail
+                    })
+                });
+
+                if (response.status === 200) {
+                    alert("Tạo bài giảng thành công");
+                    window.location.reload();
+                }
+
+                const data = await response.json();
+                console.log(data);
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
+
+        fetchData();
     };
 
     return (
@@ -181,7 +223,16 @@ const LectureCreate = () => {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
+                    <div className="lectureCreate-left__body-videoURL">
+                        <input
+                            type="text"
+                            placeholder="Video bài giảng"
+                            value={videoURL}
+                            onChange={(e) => setVideoURL(e.target.value)}
+                        />
+                    </div>
                     <div className="lectureCreate-left__body-thumbnail">
+                        <label htmlFor="thumbnail" className="lectureCreate-left__body-thumbnail-label">Thumbnail: </label>
                         <input type="file" accept="image/*" id="thumbnail" onChange={handleSetThumbnail} />
                     </div>
                     <div className="lectureCreate-left__body-eventAttach">

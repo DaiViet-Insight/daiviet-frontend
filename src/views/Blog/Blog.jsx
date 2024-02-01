@@ -13,8 +13,7 @@ const Blog = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log(localStorage.getItem("token"));
-                const response = await fetch("http://20.236.83.109:3000/api/posts?type=hot&size=10", 
+                const response = await fetch("http://20.236.83.109:3000/api/posts?type=new&size=10", 
                     {
                         method: "GET",
                         headers: {
@@ -35,7 +34,11 @@ const Blog = () => {
                         title: item.title,
                         subscription: item.content,
                         creationDate: item.createdAt,
-                        username: item.postedBy,
+                        fullname: item.User.fullname,
+                        avatar: item.User.avatar,
+                        voteCount: item.voteCount,
+                        currentUserUpvoted: item.currentUserUpvoted,
+                        currentUserDownvoted: item.currentUserDownvoted,
                     }
                     setPosts((posts) => [...posts, post]);
                 });

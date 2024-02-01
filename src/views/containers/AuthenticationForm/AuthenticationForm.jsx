@@ -36,6 +36,7 @@ const AuthenticationForm = () => {
             });
             const data = await response.json();
             if (data.message === "Auth successful") {
+                localStorage.removeItem("token");
                 localStorage.setItem("token", data.token);
                 setIsShowAuthModal(false);
             }

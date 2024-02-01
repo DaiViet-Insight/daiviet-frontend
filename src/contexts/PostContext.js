@@ -22,6 +22,8 @@ export function PostProvider({ children }) {
                 parentId: commentsFetch[i].rootCommentId,
                 id: commentsFetch[i].id,
                 content: commentsFetch[i].content,
+                fullname: commentsFetch[i].User.fullname,
+                ...commentsFetch[i]
             };
             listComments = [...listComments, comment];
         }
