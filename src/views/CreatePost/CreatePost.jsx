@@ -139,8 +139,6 @@ const CreatePost = () => {
         } catch (error) {
             console.log("error", error);
         }
-
-        
     };
 
 
