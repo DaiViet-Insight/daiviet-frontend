@@ -39,6 +39,7 @@ const AuthenticationForm = () => {
                 localStorage.removeItem("token");
                 localStorage.setItem("token", data.token);
                 setIsShowAuthModal(false);
+                window.location.reload();
             }
         }
         catch (error) {

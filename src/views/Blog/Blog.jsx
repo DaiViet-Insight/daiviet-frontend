@@ -61,9 +61,6 @@ const Blog = () => {
 
     return (
         <div className="blog">
-            <div>
-                <TimeSlider />
-            </div>
             <div className="blog-left">
                 <CreatePostPanel />
                 <FilterPosts type={filter} onFilterPostsChange={handleFilterPostsChange} />

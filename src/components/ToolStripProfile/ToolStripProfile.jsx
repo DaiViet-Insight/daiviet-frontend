@@ -5,7 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
+const { useUser } = require("../../contexts/UserContext");
+
 const ToolStripProfile = ({ username , isShow, clickEvent }) => {
+    const { logout } = useUser();
+
+    const handleLogout = () => {
+        logout();
+    }
+
     return (
         <div className="ToolStripProfile" style={
             {
@@ -24,10 +32,14 @@ const ToolStripProfile = ({ username , isShow, clickEvent }) => {
                     </ul>
                 </li>
                 <li>
-                    <Link to="/logout" className="ToolStripProfile-item__title" onClick={clickEvent}>
+                    <span className="ToolStripProfile-item__title" onClick={handleLogout} style={
+                        {
+                            cursor: "pointer"
+                        }
+                    }>
                         <FontAwesomeIcon icon={faArrowRightFromBracket} />
                         Đăng xuất
-                    </Link>
+                    </span>
                 </li>
             </ul>
         </div>

@@ -63,7 +63,9 @@ const Post = ({ post, onRemovePostInList }) => {
                 </div>
                 <div className="post-body">
                     <h2 className="post-body__title">{post.title}</h2>
-                    <p className="post-body__subscription">{post.content}</p>
+                    <p className="post-body__subscription"
+                        dangerouslySetInnerHTML={{ __html: post.content }}>
+                    </p>
                 </div>
                 <div className="post-footer">
                     <Approve clickEvent={handleApproveBtnClick} />

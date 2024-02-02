@@ -5,24 +5,7 @@ import './LectureDetail.css'
 import { RelatedLecture } from "../../components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from "@fortawesome/free-solid-svg-icons";
-
-const relatedLectures = [
-    {
-        id: 1,
-        title: "Tóm tắt nhanh hành trình đi tìm con đường cứu nước của Nguyễn Ái Quốc",
-        videoUrl: "https://www.youtube.com/embed/Qu3yMoQfWXI"
-    },
-    {
-        id: 2,
-        title: "Tóm tắt nhanh hành trình đi tìm con đường cứu nước của Nguyễn Ái Quốc",
-        videoUrl: "https://www.youtube.com/embed/Qu3yMoQfWXI"
-    },
-    {
-        id: 3,
-        title: "Tóm tắt nhanh hành trình đi tìm con đường cứu nước của Nguyễn Ái Quốc",
-        videoUrl: "https://www.youtube.com/embed/Qu3yMoQfWXI"
-    }
-];
+import { faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
 
 const hotPosts = [
     {
@@ -48,28 +31,57 @@ const hotPosts = [
 ];
 
 const LectureDetail = () => {
+    const { id:lectureId } = useParams();
     const [lectureDetail, setLectureDetail] = useState({});
+    const [relatedLectures, setRelatedLectures] = useState([]);
 
     useEffect(() => {
+        const fetchRelatedLectures = async (eventIds) => {
+            try {
+                setRelatedLectures([]);
+                const response = await fetch("http://20.236.83.109:3000/api/lectures");
+                const data = await response.json();
+                data.map((item) => {
+                    let lecture = {
+                        id: item.id,
+                        title: item.title,
+                        thumbnail: item.thumbnail,
+                    };
+                    if (lecture.id !== lectureId)
+                        setRelatedLectures((relatedLectures) => [...relatedLectures, lecture]);
+                }
+                );
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
+
         const fetchData = async () => {
             try {
                 const response = await fetch("http://20.236.83.109:3000/api/lectures/" + lectureId);
                 const data = await response.json();
+                let eventIds = data.Events?.map(event => event.id);
+                if (eventIds.length > 0) {
+                    fetchRelatedLectures(eventIds);
+                }
                 setLectureDetail({
                     id: data.id,
                     title: data.title,
                     videoURL: data.videoURL,
-                    content: data.content
+                    content: data.content,
+                    eventId: eventIds
                 });
             }
             catch (error) {
                 console.log("error", error);
             }
         }
-        fetchData();
-    }, []);
+        
 
-    const { id:lectureId } = useParams();
+        fetchData();
+    }, [lectureId]);
+
     return (
         <div className="lecture-detail">
             <div className="lecture-detail__left">
@@ -85,7 +97,7 @@ const LectureDetail = () => {
                 </div>
                 <div className="lecture-detail__action">
                     <Link to={`/lectures/${lectureDetail.id}/exam`} className="lecture-detail__btn">
-                        <FontAwesomeIcon icon={faComments} />
+                        <FontAwesomeIcon icon={faBookOpenReader} />
                         Ôn tập bài giảng
                     </Link>
                     <Link to={"/posts"} className="lecture-detail__btn">
