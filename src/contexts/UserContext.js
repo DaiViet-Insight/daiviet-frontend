@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = React.createContext();
 
@@ -8,6 +9,7 @@ export function useUser() {
 }
 
 export function UserProvider({ children, model }) {
+    const navigator = useNavigate();
     const [isShowAuthModal, setIsShowAuthModal] = useState(false);
     const [user, setUser] = useState(null)
 
@@ -16,7 +18,9 @@ export function UserProvider({ children, model }) {
     }
 
     const logout = () => {
-        setUser(null)
+        localStorage.removeItem('token');
+        setUser(null);
+        navigator('/lectures');
     }
 
     return (

@@ -25,7 +25,7 @@ function App() {
   };
 
   return (
-    <Router basename="/reddit-blog-clone">
+    <Router basename="/daiviet">
       <UserProvider model={
         <div className="rootAuthenticationForm">
           <AuthenticationForm />
