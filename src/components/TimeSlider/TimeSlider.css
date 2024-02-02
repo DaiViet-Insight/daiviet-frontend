@@ -1,0 +1,43 @@
+.slider{
+    background-color: rgb(232, 237, 232);
+    width : 30px;
+    height: 600px;
+    position: fixed;
+    top: 15%;
+    left: 50px;
+    cursor: zoom-in;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0,3,3,0.10);
+    transition: all 0.3s;
+
+    
+
+}
+
+.slider_container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.popup {
+
+    position: fixed;
+    top: 0;
+    left: 100%;
+    margin-left: 20px; /* Adjust spacing as needed */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: none; /* Initially hide the popup */
+  }
+  
+  .slider-container:hover .popup {
+    display: block; /* Show the popup on hover */
+  }
+  
