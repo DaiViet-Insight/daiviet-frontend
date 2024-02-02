@@ -37,7 +37,7 @@ const Notification = () => {
                             title: notification.title,
                             time: notification.createdAt,
                             content: notification.content,
-                            postId: notification.postId,
+                            postId: notification.postId === null ? notification.Comment?.postId : notification.postId,
                             commentId: notification.commentId
                         }
                     });

@@ -7,5 +7,6 @@ import CloseButton from './CloseButton/CloseButton.jsx';
 import BackToTopButton from './BackToTopButton/BackToTopButton.jsx';
 import Approve from './Approve/Approve.jsx';
 import Disapprove from './Disapprove/Disapprove.jsx';
+import ReportButton from './ReportButton/ReportButton.jsx';
 
-export { UpVoteButton, DownVoteButton, CommentButton, ShareButton, SavePostButton, CloseButton, BackToTopButton, Approve, Disapprove};
+export { UpVoteButton, DownVoteButton, CommentButton, ShareButton, SavePostButton, CloseButton, BackToTopButton, Approve, Disapprove, ReportButton};

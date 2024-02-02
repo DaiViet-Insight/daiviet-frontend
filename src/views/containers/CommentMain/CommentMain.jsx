@@ -1,6 +1,6 @@
 import React from "react";
 import './CommentMain.css';
-import { UpVoteButton, DownVoteButton, CommentButton, SavePostButton } from "../../../components/Button";
+import { UpVoteButton, DownVoteButton, CommentButton, SavePostButton, ReportButton } from "../../../components/Button";
 import { CommentInput, CommentList } from "../../../components";
 import { useAsyncFn } from "../../../hooks/useAsync.js";
 import { createComment } from "../../../services/comments.js";
@@ -8,7 +8,7 @@ import { createComment } from "../../../services/comments.js";
 const { usePost } = require("../../../contexts/PostContext");
 
 const CommentMain = ({ post, rootComments, onUpvotePost, onDownvotePost, voteCount, currentUserUpvoted, currentUserDownvoted }) => {
-    const { createLocalComment } = usePost();
+    const { setIsShowAuthModal, createLocalComment } = usePost();
     const handleUpVote = () => {
         onUpvotePost(post.id);
     }
@@ -31,17 +31,56 @@ const CommentMain = ({ post, rootComments, onUpvotePost, onDownvotePost, voteCou
         return createCommentFn
             .execute({ postId: post.id, content, parentId: null })
             .then(result => {
-                if (result === "Tạo comment thành công !!!") {
+                if (result.id !== null && result.id !== undefined) {
                     createLocalComment({
-                        parentId: post.id,
+                        id: result.id,
+                        parentId: null,
                         currentUserDownvoted: false,
                         currentUserUpvoted: false,
                         downvotesCount: 0,
-                        fullname: "Tran Tuan",
+                        postedBy: result.postedBy,
                         content: content,
+                        createdAt: result.createdAt,
+                        voteCount: 0,
+                        upVotesCount: 0,
+                        User: {
+                            fullname: result.User?.fullname,
+                            avatar: result.User?.avatar,
+                            id: result.User?.id,
+                        },
+                        fullname: result.User?.fullname,
+                        postId: result.postId,
                     })
                 }
             })
+    }
+
+    const handleReportPost = () => {
+        const reportPost = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API}/api/posts/${post.id}/report`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                });
+
+                if (response.status === 401) {
+                    setIsShowAuthModal(true);
+                    return;
+                }
+
+                if (response.status === 200) {
+                    console.log("Reported post");
+                }
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
+
+        reportPost();
     }
 
     return (
@@ -64,11 +103,14 @@ const CommentMain = ({ post, rootComments, onUpvotePost, onDownvotePost, voteCou
                         </div>
                         <div className="post-body">
                             <h2 className="post-body__title">{post.title}</h2>
-                            <p className="post-body__subscription">{post.content}</p>
+                            <p className="post-body__subscription"
+                                dangerouslySetInnerHTML={{ __html: post.content }}
+                            ></p>
                         </div>
                         <div className="post-footer">
                             <CommentButton clickEvent={handleCommentBtnClick} />
                             <SavePostButton clickEvent={handleSavePostBtnClick} />
+                            <ReportButton clickEvent={handleReportPost} />
                         </div>
 
                         <div className="comment-main__bottom">

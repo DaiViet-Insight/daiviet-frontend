@@ -3,12 +3,16 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import './Navbar.css';
 import logo from '../../../assets/images/DaiVietLogo.jpeg';
+import relatedImage from '../../../assets/images/related_avatar.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { SearchBar, ToolStripProfile } from "../../../components";
 import { NotificationPanel } from "../../containers";
 
+const { useUser } = require("../../../contexts/UserContext");
+
 const Navbar = () => {
+    const { user } = useUser();
     const [isShow, setIsShow] = useState(false);
 
     const handleToolStripProfileClick = () => {
@@ -105,10 +109,12 @@ const Navbar = () => {
             </ul>
             <div className="navbar-profile">
                 <div className="navbar-profile__avatar">
-                    <img src="https://www.redditstatic.com/avatars/avatar_default_19_FF8717.png" alt="avatar" className="navbar-profile-avatar__img" />
+                    <img src={ user ? user.avatar : relatedImage } alt="avatar" className="navbar-profile-avatar__img" />
                 </div>
                 <div className="navbar-profile__info">
-                    <span className="navbar-profile-info__name">u/username</span>
+                    <span className="navbar-profile-info__name">{
+                        user ? user.fullname : "u/username"
+                    }</span>
                     <span className="navbar-profile-info__karma">Karma: 0</span>
                 </div>
                 <FontAwesomeIcon icon={faAngleDown} className="navbar-profile__icon" />

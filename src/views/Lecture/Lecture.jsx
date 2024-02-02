@@ -24,7 +24,6 @@ const Lecture = () => {
                     };
                     setLectures((lectures) => [...lectures, lecture]);
                 });
-                console.log(data);
             }
             catch (error) {
                 console.log("error", error);

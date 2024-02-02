@@ -1,16 +1,16 @@
 import React from "react";
-import './ModSite.css';
-import Post from "../containers/ModSite/Post";
+import './ReportedPost.css';
+import Post from "../containers/ReportedPost/Post";
 
 const { useUser } = require("../../contexts/UserContext");
 
-const ModSite = () => {
+const ReportedPost = () => {
     const { setIsShowAuthModal } = useUser();
     const [posts, setPosts] = React.useState([]);
 
     React.useEffect(() => {
         const fetchPosts = async () => {
-            const response = await fetch(`${process.env.REACT_APP_API}/api/posts/unapproved`,
+            const response = await fetch(`${process.env.REACT_APP_API}/api/posts/reports`,
                 {
                     method: "GET",
                     headers: {
@@ -28,7 +28,16 @@ const ModSite = () => {
             }
             const data = await response.json();
             console.log(data);
-            setPosts(data);
+            let posts = data.map(post => {
+                return {
+                    id: post.Post?.id,
+                    title: post.Post?.title,
+                    content: post.Post?.content,
+                    User: post.Post?.User,
+                    createdAt: post.Post?.createdAt,
+                }
+            });
+            setPosts(posts);
         };
         
         fetchPosts();
@@ -53,4 +62,4 @@ const ModSite = () => {
     );
 };
 
-export default ModSite;
+export default ReportedPost;

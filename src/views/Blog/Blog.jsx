@@ -7,7 +7,7 @@ import { CreatePostPanel, FilterPosts, QuickAccess ,TimeSlider} from "../../comp
 import Post from "../containers/Post/Post";
 
 const Blog = () => {
-    const { setIsShowAuthModal } = useUser();
+    const { setIsShowAuthModal, user } = useUser();
     const [posts, setPosts] = useState([]);
     const [filter, setFilter] = useState("new");
 
@@ -62,7 +62,7 @@ const Blog = () => {
     return (
         <div className="blog">
             <div className="blog-left">
-                <CreatePostPanel />
+                <CreatePostPanel user={user} />
                 <FilterPosts type={filter} onFilterPostsChange={handleFilterPostsChange} />
                 <div className="posts">
                     {posts.map((post) => (<Post key={post.id} post={post}/>))}
