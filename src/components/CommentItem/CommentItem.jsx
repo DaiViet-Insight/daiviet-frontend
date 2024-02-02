@@ -5,10 +5,12 @@ import './CommentItem.css';
 import { UpVoteButton, DownVoteButton } from "../Button";
 import CommentInput from "../CommentInput/CommentInput";
 import CommentList from "../CommentList/CommentList";
+import { useAsyncFn } from "../../hooks/useAsync.js";
+import { createComment } from "../../services/comments.js";
 
 const CommentItem = ({ comment }) => {
     const [isReplying, setIsReplying] = useState(false)
-    const { getReplies } = usePost();
+    const { getReplies, createLocalComment } = usePost();
 
     const handleUpVote = () => {
         console.log("upvote");
@@ -20,9 +22,35 @@ const CommentItem = ({ comment }) => {
 
     const childComments = getReplies(comment.id);
 
+    const createCommentFn = useAsyncFn(createComment);
+
     const handleSubmitCommentReply = (content) => {
-        setIsReplying(!isReplying);
-        console.log(content);
+        return createCommentFn
+            .execute({ postId: comment.postId, content, parentId: comment.id })
+            .then(result => {
+                setIsReplying(false)
+                if (result.id !== null && result.id !== undefined) {
+                    createLocalComment({
+                        id: result.id,
+                        parentId: result.rootCommentId,
+                        currentUserDownvoted: false,
+                        currentUserUpvoted: false,
+                        downvotesCount: 0,
+                        postedBy: result.postedBy,
+                        content: content,
+                        createdAt: result.createdAt,
+                        voteCount: 0,
+                        upVotesCount: 0,
+                        User: {
+                            fullname: result.User?.fullname,
+                            avatar: result.User?.avatar,
+                            id: result.User?.id,
+                        },
+                        fullname: result.User?.fullname,
+                        postId: result.postId,
+                    })
+                }
+            })
     }
 
     return (
@@ -38,7 +66,9 @@ const CommentItem = ({ comment }) => {
                     <span className="comment-list__item-header-date">{comment.createdAt}</span>
                 </div>
                 <div className="comment-list__item-body">
-                    <p className="comment-list__item-body__content">{comment.content}</p>
+                    <p className="comment-list__item-body__content"
+                        dangerouslySetInnerHTML={{ __html: comment.content }}
+                    ></p>
                 </div>
                 <div className="comment-list__item-footer">
                     <UpVoteButton upVote={handleUpVote} />
@@ -50,10 +80,10 @@ const CommentItem = ({ comment }) => {
                 </div>
                 {
                     isReplying && (
-                        <CommentInput 
-                            isReply={true} 
+                        <CommentInput
+                            isReply={true}
                             cancelClickEvent={() => setIsReplying(!isReplying)}
-                            replyClickEvent={handleSubmitCommentReply} 
+                            replyClickEvent={handleSubmitCommentReply}
                         />
                     )
                 }

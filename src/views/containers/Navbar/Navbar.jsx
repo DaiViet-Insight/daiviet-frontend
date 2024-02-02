@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import './Navbar.css';
-import logo from '../../../assets/images/Reddit-Logo.png';
+import logo from '../../../assets/images/DaiVietLogo.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { SearchBar, ToolStripProfile } from "../../../components";

@@ -14,6 +14,22 @@ export function PostProvider({ children }) {
     const { id : postId } = useParams();
     const { data: post, loading, error } = useAsync(() => getPost(postId), [postId]);
     const [comments, setComments] = useState([])
+    useEffect(() => {
+        let listComments = [];
+        for (let i = 0; i < commentsFetch?.length; i++) {
+            const comment = {
+                parentId: commentsFetch[i].rootCommentId,
+                id: commentsFetch[i].id,
+                content: commentsFetch[i].content,
+                fullname: commentsFetch[i].User.fullname,
+                ...commentsFetch[i]
+            };
+            listComments = [...listComments, comment];
+        }
+        setComments(listComments);
+        console.log(listComments);
+    }, [loadingComments]); // Run this effect when commentsFetch changes
+
     const commentsByParentId = useMemo(() => {
         const group = {}
         comments.forEach(comment => {
@@ -31,13 +47,20 @@ export function PostProvider({ children }) {
     const getReplies = (parentId) => {
         return commentsByParentId[parentId]
     }
-    
+
+    function createLocalComment(comment) {
+        setComments(prevComments => {
+          return [comment, ...prevComments]
+        })
+      }
+
     return (
         <PostContext.Provider 
             value={{ 
                 post: {postId, ...post},
                 rootComments: commentsByParentId[null],
                 getReplies,
+                createLocalComment,
             }}
         >
         {children}

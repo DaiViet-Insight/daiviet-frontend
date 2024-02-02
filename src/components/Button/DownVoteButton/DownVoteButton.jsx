@@ -1,12 +1,17 @@
 import React from "react";
 import './DownVoteButton.css';
 
-const DownVoteButton = ({idPost, props, downVote}) => {
+const DownVoteButton = ({idPost, props, downVote, currentUserDownvoted}) => {
     let strokeColor = "#000";
     let hoverBackColor = "#ebebeb";
     if (props) {
         strokeColor = props.strokeColor || "#000";
         hoverBackColor = props.hoverBackColor || "#ebebeb";
+    }
+
+    // Kiểm tra nếu currentUserUpvoted là true thì thay đổi màu của biểu tượng
+    if (currentUserDownvoted) {
+        strokeColor = "#5a75cc"; // Màu xanh hoặc màu khác tùy bạn chọn
     }
 
     return (

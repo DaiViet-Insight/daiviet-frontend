@@ -9,6 +9,11 @@ const UpVoteButton = ({idPost, props, upVote}) => {
         hoverBackColor = props.hoverBackColor || "#ebebeb";
     }
 
+    // Kiểm tra nếu currentUserUpvoted là true thì thay đổi màu của biểu tượng
+    if (currentUserUpvoted) {
+        strokeColor = "#cc3700"; // Màu đỏ hoặc màu khác tùy bạn chọn
+    }
+
     return (
         <button 
             className="upVoteButton" 

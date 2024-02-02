@@ -5,13 +5,85 @@ import { useNavigate } from "react-router-dom";
 
 const Post = ({ post }) => {
     const navigate = useNavigate();
+    const { setIsShowAuthModal } = useUser();
+    const [currentUserUpvoted, setCurrentUserUpvoted] = useState(post.currentUserUpvoted);
+    const [currentUserDownvoted, setCurrentUserDownvoted] = useState(post.currentUserDownvoted);
+    const [voteCount, setVoteCount] = useState(post.voteCount ?? 0);
 
     const handleUpVote = () => {
-        console.log("Up Vote");
+        const upVote = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API}/api/posts/${post.id}/upvote`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                });
+
+                if (response.status === 401) {
+                    setIsShowAuthModal(true);
+                    return;
+                }
+
+                if (response.status === 200) {
+                    if (currentUserUpvoted) {
+                        setVoteCount(voteCount - 1);
+                    } else {
+                        if (currentUserDownvoted) {
+                            setVoteCount(voteCount + 2);
+                        } else {
+                            setVoteCount(voteCount + 1);
+                        }
+                    }
+                    setCurrentUserUpvoted(!currentUserUpvoted);
+                    setCurrentUserDownvoted(false);
+                }
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
+
+        upVote();
     };
 
     const handleDownVote = () => {
-        console.log("Down Vote");
+        const downVote = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API}/api/posts/${post.id}/downvote`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                });
+
+                if (response.status === 401) {
+                    setIsShowAuthModal(true);
+                    return;
+                }
+
+                if (response.status === 200) {
+                    if (currentUserDownvoted) {
+                        setVoteCount(voteCount + 1);
+                    } else {
+                        if (currentUserUpvoted) {
+                            setVoteCount(voteCount - 2);
+                        } else {
+                            setVoteCount(voteCount - 1);
+                        }
+                    }
+                    setCurrentUserDownvoted(!currentUserDownvoted);
+                    setCurrentUserUpvoted(false);
+                }
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
+
+        downVote();
     }
 
     const handleCommentBtnClick = () => {
@@ -25,9 +97,9 @@ const Post = ({ post }) => {
     return (
         <div className="post">
             <div className="post-left">
-                <UpVoteButton upVote={handleUpVote} />
-                <span className="post-votes">0</span>
-                <DownVoteButton downVote={handleDownVote} />
+                <UpVoteButton upVote={handleUpVote} currentUserUpvoted={currentUserUpvoted} />
+                <span className="post-votes">{voteCount}</span>
+                <DownVoteButton downVote={handleDownVote} currentUserDownvoted={currentUserDownvoted} />
             </div>
             <div className="post-right">
                 <div className="post-header">
