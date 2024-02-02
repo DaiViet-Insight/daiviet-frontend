@@ -15,7 +15,7 @@ const PostPanel = ({ post }) => {
     }
 
     const handleCommentBtnClick = () => {
-        navigate("/comments/" + post.id);
+        navigate("/posts/" + post.id + "/comments");
     }
 
     const handleSavePostBtnClick = () => {
@@ -26,17 +26,17 @@ const PostPanel = ({ post }) => {
         <div className="post-panel">
             <div className="post-panel-left">
                 <UpVoteButton upVote={handleUpVote} />
-                <span className="post-panel-votes">0</span>
+                <span className="post-panel-votes">{post.voteCount}</span>
                 <DownVoteButton downVote={handleDownVote} />
             </div>
             <div className="post-panel-right">
                 <div className="post-panel-header">
                     <span className="post-panel-header-id" hidden>#{post.id}</span>
                     <span className="post-panel-header-author">
-                        <img src={post.avatar} className="post-panel-header__author-avatar" alt="Author" />
-                        <span className="post-panel-header__author-username">{post.username}</span>
+                        <img src={post.User?.avatar} className="post-panel-header__author-avatar" alt="Author" />
+                        <span className="post-panel-header__author-username">{post.User?.fullname}</span>
                     </span>
-                    <span className="post-panel-header-date">{post.creationDate}</span>
+                    <span className="post-panel-header-date">{post.createdAt}</span>
                 </div>
                 <div className="post-panel-body">
                     <h2 className="post-panel-body__title">{post.title}</h2>

@@ -73,7 +73,9 @@ const NotificationPanel = ({ isShow, clickEvent }) => {
                             avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
                             title: notification.title,
                             time: notification.createdAt,
-                            content: "Temp"
+                            content: notification.content,
+                            postId: notification.postId,
+                            commentId: notification.commentId
                         }
                     });
                     setNotifications(notifications);
@@ -105,7 +107,8 @@ const NotificationPanel = ({ isShow, clickEvent }) => {
             <div className="notification-panel__content__collection">
                 {
                     notifications.length > 0 ? notifications.map((notification) => (
-                        <div className="notification-panel__content__item" key={notification.id}>
+                        <Link to={`/posts/${notification.postId}/comments`} key={notification.id} onClick={clickEvent}>
+                            <div className="notification-panel__content__item" key={notification.id}>
                             <div className="notification-panel__content__item-avatar">
                                 <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="avatar" />
                             </div>
@@ -118,7 +121,8 @@ const NotificationPanel = ({ isShow, clickEvent }) => {
                                 <p className="notification-panel__content__item-body-content">{notification.content}</p>
                             </div>
                         </div>
-                    </div>
+                        </div>
+                    </Link>
                 )) : (
                     <div className="notification-panel__content__no-collection">
                         <p className="notification-panel__content__no-collection-text">There are no notifications</p>
