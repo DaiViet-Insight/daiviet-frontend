@@ -48,7 +48,6 @@
 .notification-panel__content__item {
     display: flex;
     padding: 5px 10px;
-    width: 100%;
     gap: 8px;
     border-bottom: 1px solid rgb(237, 239, 241);
     cursor: pointer;

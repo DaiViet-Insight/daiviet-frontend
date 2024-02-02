@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import './LectureDetail.css'
 import { RelatedLecture } from "../../components";
@@ -23,6 +22,14 @@ const relatedLectures = [
         videoUrl: "https://www.youtube.com/embed/Qu3yMoQfWXI"
     }
 ];
+
+const lectureDetail = {
+    title: "Tóm tắt nhanh hành trình đi tìm con đường cứu nước của Nguyễn Ái Quốc",
+    videoUrl: "https://www.youtube.com/embed/Qu3yMoQfWXI",
+    content: "Đầu thế kỷ XX, Việt Nam đã có một lớp thanh niên ưu tú rời đất nước ra đi vì khát vọng giành lại độc lập cho Tổ quốc, tự do và phẩm giá cho đồng bào...Đầu thế kỷ XX, Việt Nam đã có một lớp thanh niên ưu tú rời đất nước ra đi vì khát vọng giành lại độc lập cho Tổ quốc, tự do và phẩm giá cho đồng bào. Số đông nô nức Đông du theo lời kêu gọi đầy nhiệt huyết của Phan Bội Châu. Duy chỉ có thầy giáo Nguyễn Tất Thành dám một mình sang phương Tây..." +
+    "Đầu thế kỷ XX, Việt Nam đã có một lớp thanh niên ưu tú rời đất nước ra đi vì khát vọng giành lại độc lập cho Tổ quốc, tự do và phẩm giá cho đồng bào...Đầu thế kỷ XX, Việt Nam đã có một lớp thanh niên ưu tú rời đất nước ra đi vì khát vọng giành lại độc lập cho Tổ quốc, tự do và phẩm giá cho đồng bào. Số đông nô nức Đông du theo lời kêu gọi đầy nhiệt huyết của Phan Bội Châu. Duy chỉ có thầy giáo Nguyễn Tất Thành dám một mình sang phương Tây..." +
+    "Đầu thế kỷ XX, Việt Nam đã có một lớp thanh niên ưu tú rời đất nước ra đi vì khát vọng giành lại độc lập cho Tổ quốc, tự do và phẩm giá cho đồng bào...Đầu thế kỷ XX, Việt Nam đã có một lớp thanh niên ưu tú rời đất nước ra đi vì khát vọng giành lại độc lập cho Tổ quốc, tự do và phẩm giá cho đồng bào. Số đông nô nức Đông du theo lời kêu gọi đầy nhiệt huyết của Phan Bội Châu. Duy chỉ có thầy giáo Nguyễn Tất Thành dám một mình sang phương Tây..."
+};
 
 const hotPosts = [
     {
@@ -48,26 +55,6 @@ const hotPosts = [
 ];
 
 const LectureDetail = () => {
-    const [lectureDetail, setLectureDetail] = useState({});
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch("http://20.236.83.109:3000/api/lectures/" + lectureId);
-                const data = await response.json();
-                setLectureDetail({
-                    title: data.title,
-                    videoURL: data.videoURL,
-                    content: data.content
-                });
-            }
-            catch (error) {
-                console.log("error", error);
-            }
-        }
-        fetchData();
-    }, []);
-
     const { id:lectureId } = useParams();
     console.log(lectureId);
     return (
@@ -76,8 +63,9 @@ const LectureDetail = () => {
                 <div className="lecture-detail__video">
                     <iframe className="lecture-detail__video__iframe"
                         title="lecture-detail"
-                        src={lectureDetail.videoURL}
-                        allowFullScreen
+                        src={lectureDetail.videoUrl}
+                        frameborder="0"
+                        allowfullscreen
                     ></iframe>
                 </div>
                 <div className="lecture-detail__title">

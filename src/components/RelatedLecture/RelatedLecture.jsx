@@ -4,9 +4,12 @@ import './RelatedLecture.css';
 const RelatedLecture = ({ lecture }) => {
     return (
         <div className="relatedLecture">
-            <img className="relatedLecture__thumbnail"
-                src={lecture.thumbnail ? lecture.thumbnail : "https://via.placeholder.com/150"}
-            ></img>
+            <iframe className="relatedLecture__iframe"
+                title="relatedLecture"
+                src={lecture.videoUrl}
+                frameborder="0"
+                allowfullscreen
+            ></iframe>
             <div className="relatedLecture__title">
                 {lecture.title}
             </div>

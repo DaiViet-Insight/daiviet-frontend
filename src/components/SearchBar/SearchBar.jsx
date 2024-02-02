@@ -1,23 +1,10 @@
-import React, { forwardRef, useImperativeHandle } from "react";
+import React from "react";
 import { useState, useRef } from "react";
 import "./SearchBar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const SearchBar = ({ inputPlaceholder, data }, ref) => {
-    const dataRef = useRef(null);
-
-    useImperativeHandle(ref, () => 
-        {
-            return { 
-                setData: (value) => {
-                    dataRef.current = value;
-                    data = value;
-                    handleSetSearchBarValue("");
-                }
-        }
-    });
-
+const SearchBar = ({ inputPlaceholder, data }) => {
     const [dataFilter, setDataFilter] = useState(data);
     const [isShow, setIsShow] = useState(false);
     const [searchBarValue, setSearchBarValue] = useState("");
@@ -84,4 +71,4 @@ const SearchBar = ({ inputPlaceholder, data }, ref) => {
     );
 }
 
-export default forwardRef(SearchBar);
+export default SearchBar;

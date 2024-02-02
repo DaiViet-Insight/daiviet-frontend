@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './CommentHeader.css';
 import { UpVoteButton, DownVoteButton, CloseButton } from "../Button";
 
-const CommentHeader = ({ post }) => {
+const CommentHeader = () => {
     const navigate = useNavigate();
     const handleUpVote = () => {
         console.log("upvote");
@@ -28,7 +28,7 @@ const CommentHeader = ({ post }) => {
                 }
                 upVote={handleUpVote}
             />
-            <span className="comment-post-votes">{post.voteCount}</span>
+            <span className="comment-post-votes">4.2k</span>
             <DownVoteButton 
                 props={
                     {
@@ -39,7 +39,7 @@ const CommentHeader = ({ post }) => {
                 downVote={handleDownVote}
             />
         </div>
-        <h2 className="comment-post-title">{post.title}</h2>
+        <h2 className="comment-post-title">10x Stronger Than Kevlar: Amorphous Silicon Carbide Could Revolutionize </h2>
         <CloseButton clickEvent={handleCloseBtn} />
     </div>;
 }

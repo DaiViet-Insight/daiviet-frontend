@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import './SearchBarEvent.css';
 
-const SearchBarEvent = ({ events, onClickAddEvent }) => {
+const SearchBarEvent = ({ events }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
 
@@ -32,10 +32,7 @@ const SearchBarEvent = ({ events, onClickAddEvent }) => {
                         {
                             searchResults.map((event) => (
                                 <li className="searchBarEvent__body-list-li" key={event.id}>
-                                    <button 
-                                        className="searchBarEvent__body-list-li-btn"
-                                        onClick={() => onClickAddEvent(event)}
-                                    >{event.name}</button>
+                                    <button className="searchBarEvent__body-list-li-btn">{event.name}</button>
                                 </li>
                             ))
                         }

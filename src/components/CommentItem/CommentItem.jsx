@@ -29,12 +29,12 @@ const CommentItem = ({ comment }) => {
         <div className="comment-list__item" key={comment.id}>
             <div className="comment-list__item-left">
                 <div className="comment-list__item-left-author">
-                    <img src={comment.User?.avatar} className="comment-list__item-header__author-avatar" alt="Author" />
+                    <img src={comment.avatar} className="comment-list__item-header__author-avatar" alt="Author" />
                 </div>
             </div>
             <div className="comment-list__item-right">
                 <div className="comment-list__item-header">
-                    <span className="comment-list__item-header__author-username">{comment.fullname}</span>
+                    <span className="comment-list__item-header__author-username">{comment.username}</span>
                     <span className="comment-list__item-header-date">{comment.createdAt}</span>
                 </div>
                 <div className="comment-list__item-body">
@@ -42,7 +42,7 @@ const CommentItem = ({ comment }) => {
                 </div>
                 <div className="comment-list__item-footer">
                     <UpVoteButton upVote={handleUpVote} />
-                    <span className="comment-list__item-votes">{comment.voteCount}</span>
+                    <span className="comment-list__item-votes">{comment.votes}</span>
                     <DownVoteButton downVote={handleDownVote} />
                     <div className="comment-list__item-reply">
                         <button className="comment-list__item-reply-btn" onClick={() => setIsReplying(!isReplying)}>Reply</button>
