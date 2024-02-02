@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { EventAttach, SearchBarEvent } from "../../components";
+import { EventAttach, SearchBarEvent , Loading} from "../../components";
 import ReactQuill from 'react-quill';
 import './LectureCreate.css';
 import 'react-quill/dist/quill.snow.css';
@@ -23,7 +23,7 @@ const uploadToCloudinary = async (file) => {
 
 const LectureCreate = () => {
     const reactQuillRef = useRef(null);
-    
+    const [loading, setLoading] = useState(false)
     const clipboardHandler = useCallback(async (e) => {
     //handle paste image
     //if image is pasted delete the current selection and insert the image
@@ -115,6 +115,7 @@ const LectureCreate = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                
                 const response = await fetch("http://20.236.83.109:3000/api/events");
                 const data = await response.json();
                 let events = data.map((event) => {
@@ -174,7 +175,7 @@ const LectureCreate = () => {
             setIsShowAuthModal(true);
             return;
         }
-
+        setLoading(true);
         const fetchData = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_API}/api/lectures`, {
@@ -191,10 +192,9 @@ const LectureCreate = () => {
                         thumbnail: thumbnail
                     })
                 });
-
-                if (response.status === 200) {
-                    alert("Tạo bài giảng thành công");
-                    window.location.reload();
+                if (response.status === 201) {
+                    setLoading(false);
+                    window.location.href = "/daiviet/lectures";
                 }
 
                 const data = await response.json();
@@ -210,6 +210,7 @@ const LectureCreate = () => {
 
     return (
         <div className="lectureCreate">
+            {loading && <Loading />}
             <div className="lectureCreate-left">
                 <div className="lectureCreate-left__header">
                     <h1 className="lectureCreate-left__header-heading">Tạo bài giảng</h1>

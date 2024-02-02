@@ -136,7 +136,6 @@ const CreatePost = () => {
                     eventIds: eventAttach.map((event) => event.id)
                 })
             });
-            console.log(response.status)
             if (response.status === 200) {
                 console.log("abc")
                 setLoading(false);
