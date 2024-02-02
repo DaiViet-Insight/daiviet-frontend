@@ -56,6 +56,7 @@ const LectureDetail = () => {
                 const response = await fetch("http://20.236.83.109:3000/api/lectures/" + lectureId);
                 const data = await response.json();
                 setLectureDetail({
+                    id: data.id,
                     title: data.title,
                     videoURL: data.videoURL,
                     content: data.content
@@ -69,7 +70,6 @@ const LectureDetail = () => {
     }, []);
 
     const { id:lectureId } = useParams();
-    console.log(lectureId);
     return (
         <div className="lecture-detail">
             <div className="lecture-detail__left">
@@ -84,6 +84,10 @@ const LectureDetail = () => {
                     {lectureDetail.title}
                 </div>
                 <div className="lecture-detail__action">
+                    <Link to={`/lectures/${lectureDetail.id}/exam`} className="lecture-detail__btn">
+                        <FontAwesomeIcon icon={faComments} />
+                        Ôn tập bài giảng
+                    </Link>
                     <Link to={"/posts"} className="lecture-detail__btn">
                         <FontAwesomeIcon icon={faComments} />
                         Diễn đàn

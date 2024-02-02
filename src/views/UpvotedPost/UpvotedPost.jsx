@@ -28,7 +28,6 @@ const UpvotedPost = () => {
 
                 if (response.status === 200) {
                     const data = await response.json();
-                    console.log("data", data);
                     setPosts(data);
                 }
             }

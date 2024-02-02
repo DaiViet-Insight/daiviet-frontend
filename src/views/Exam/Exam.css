@@ -1,0 +1,140 @@
+.exam {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exam-container {
+    padding-top: 10px;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.exam-title {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.exam-title:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.exam-action {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.exam-action-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: url('../../assets/images/Background.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    outline: none;
+    border: none;
+}
+
+.exam-action-btn.disable {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.exam .question {
+    display: none;
+    margin-bottom: 20px;
+}
+
+.exam .question.active {
+    display: block;
+}
+
+.exam .question-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    min-height: 100px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background: url('../../assets/images/Background.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.exam .options {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 20px;
+}
+
+.exam .option {
+    width: 48%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: url('../../assets/images/Background.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    word-wrap: break-word;
+}
+
+.correct, .incorrect {
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-top: 20px;
+}
+
+.correct {
+    color: green;
+}
+
+.correctBorder {
+    outline: 2px solid green;
+}
+
+.incorrect {
+    color: red;
+}
+
+.incorrectBorder {
+    outline: 2px solid red;
+}
+
+.exam .correct-answer {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.exam .explain {
+    margin-top: 20px;
+    padding: 4px 8px;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.exam .typing,
+.exam .gpt-answer {
+    margin-top: 10px;
+    font-size: 1.6rem;
+    font-weight: 700;
+}

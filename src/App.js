@@ -10,6 +10,7 @@ import Comment from "./views/Comment/Comment";
 import Navbar from "./views/containers/Navbar/Navbar";
 import ModSite from "./views/ModSite/ModSite";
 import Profile from "./views/Profile/Profile";
+import Exam from "./views/Exam/Exam";
 import NotFound from "./views/NotFound/NotFound";
 import { PostProvider } from "./contexts/PostContext";
 import { AuthenticationForm, ChatBox } from "./views/containers";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/posts" element={<Blog />} />
           <Route path="/posts/create" element={<CreatePost />} />
           <Route path="/mod" element={<ModSite />} />
+          <Route path="/lectures/:id/exam" element={<Exam />} />
           <Route
             path="posts/:id/comments"
             element={
