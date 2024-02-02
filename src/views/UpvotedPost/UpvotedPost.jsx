@@ -1,11 +1,44 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import './UpvotedPost.css';
 import { PostSkeleton, ProfilePanel } from '../../components';
 import { PostPanel } from '../containers';
 
-const posts = [];
+const { useUser } = require("../../contexts/UserContext");
 
 const UpvotedPost = () => {
+    const { setIsShowAuthModal } = useUser();
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://20.236.83.109:3000/api/posts/upvotes", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                });
+
+                if (response.status === 401) {
+                    setIsShowAuthModal(true);
+                    return;
+                }
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log("data", data);
+                    setPosts(data);
+                }
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
+        fetchData();
+    }, []);
+
     return (
         <div className="upvoted-post">
             <div className="upvoted-post__container">
