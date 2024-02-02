@@ -1,0 +1,144 @@
+/* Important */
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: 600;
+}
+
+/* lectureCreate */
+.lectureCreate {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 70px;
+    min-height: 100vh;
+    background-color: #dae0e6;
+}
+
+/* Left */
+.lectureCreate-left {
+    width: 100%;
+    max-width: 800px;
+}
+
+.lectureCreate-left__header {
+    margin-bottom: 20px;
+}
+
+.lectureCreate-left__header::after {
+    content: '';
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+}
+
+.lectureCreate-left__header-heading {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.ql-editor {
+    min-height: 300px;
+}
+
+/* Body */
+.lectureCreate-left__body {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.lectureCreate-left__body-title,
+.lectureCreate-left__body-videoURL {
+    margin-bottom: 20px;
+}
+
+.lectureCreate-left__body-title input,
+.lectureCreate-left__body-videoURL input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 5px;
+}
+
+.lectureCreate-left__body-thumbnail {
+    margin-bottom: 10px;
+}
+
+.lectureCreate-left__body-thumbnail-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.lectureCreate-left__body-eventAttach {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Content */
+
+.lectureCreate-left__body-content-editor {
+    margin-top: 20px;
+    overflow-y: auto; /* Add vertical scrolling when the content exceeds the height */
+}
+
+/* Footer */
+
+.lectureCreate-left__body-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.lectureCreate-left__body-footer-btn {
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.lectureCreate-left__body-footer-btn:hover {
+    color: #fff;
+    background-color: #0079D3;
+}
+
+/* Right */
+.lectureCreate-right {
+    width: 100%;
+    max-width: 270px;
+}
+
+.lectureCreate-right__select {
+    margin-bottom: 28px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 5px;
+}
+
+.lectureCreate-right__select option {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}

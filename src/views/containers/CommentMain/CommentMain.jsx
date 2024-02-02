@@ -31,7 +31,6 @@ const comments = [
 ];
 
 const CommentMain = ({ post, rootComments }) => {
-
     const handleUpVote = () => {
         console.log("upvote");
     }
@@ -58,15 +57,15 @@ const CommentMain = ({ post, rootComments }) => {
                 <div className="comment-main__top">
                     <div className="comment-main__left">
                         <UpVoteButton upVote={handleUpVote} />
-                        <span className="comment-main__votes">4.2k</span>
+                        <span className="comment-main__votes">{post.voteCount}</span>
                         <DownVoteButton downVote={handleDownVote} />
                     </div>
                     <div className="comment-main__right">
                         <div className="post-header">
                             <span className="post-header-id" hidden>{post.id}</span>
                             <span className="post-header-author">
-                                <img src={post.avatar} className="post-header__author-avatar" alt="Author" />
-                                <span className="post-header__author-username">{post.username}</span>
+                                <img src={post.User?.avatar} className="post-header__author-avatar" alt="Author" />
+                                <span className="post-header__author-username">{post.User?.fullname}</span>
                             </span>
                             <span className="post-header-date">{post.createdAt}</span>
                         </div>

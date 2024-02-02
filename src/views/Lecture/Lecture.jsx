@@ -1,46 +1,260 @@
-import React from "react";
+import React, { useState ,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Lecture.css";
 import { LectureItemThumb } from "../../components";
+import LeftNav from "../containers/LeftNav/LeftNav";
 
-const lectures = [
-    {
-        id: 1,
-        title: "Chiến thắng Điện Biên Phủ 1954 - ý nghĩa lịch sử và giá trị thời đại",
-        thumbnail: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Victory_in_Battle_of_Dien_Bien_Phu.jpg",
-    },
-    {
-        id: 2,
-        title: "Cách mạng Tháng Tám",
-        thumbnail: "https://tuyengiao.hagiang.gov.vn/upload/64711/20220818/Nhan_dan_ta_vui_mung_phan_khoi_sau_Cach_mang_Thang_8_f411f.jpg",
-    },
-    {
-        id: 3,
-        title: "Chiến dịch Điện Biên Phủ",
-        thumbnail: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Victory_in_Battle_of_Dien_Bien_Phu.jpg",
-    },
-    {
-        id: 4,
-        title: "Cách mạng Tháng Tám",
-        thumbnail: "https://tuyengiao.hagiang.gov.vn/upload/64711/20220818/Nhan_dan_ta_vui_mung_phan_khoi_sau_Cach_mang_Thang_8_f411f.jpg",
-    }
-];
+import bgImg from "../../assets/images/bg.png";
+
+
+ // fake data In a separate file or within the same file, create a mock data array
+//  const mockLectures = [
+//     {
+//         id: 1,
+//         title: "Introduction to React",
+//         thumbnail: "url_to_thumbnail_image_1",
+//     },
+//     {
+//         id: 2,
+//         title: "State Management in React",
+//         thumbnail: "url_to_thumbnail_image_2",
+//     },
+//     {
+//         id: 3,
+//         title: "State Management in React",
+//         thumbnail: "url_to_thumbnail_image_2",
+//     },
+//     {
+//         id: 4,
+//         title: "State Management in React",
+//         thumbnail: "url_to_thumbnail_image_2",
+//     },
+// ];
+
+// const mockTopicsList = [
+//     {
+//         name: "Topic 1",
+//         lectures: [
+//             {
+//                 id: 1,
+//                 title: "Introduction to React",
+//                 thumbnail: "url_to_thumbnail_image_1",
+//             },
+//             {
+//                 id: 2,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//         ],
+//     },
+//     {
+//         name: "Topic 2",
+//         lectures: [
+//             {
+//                 id: 3,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//             {
+//                 id: 4,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//         ],
+//     },
+//     {
+//         name: "Topic 3",
+//         lectures: [
+//             {
+//                 id: 5,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//             {
+//                 id: 6,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//         ],
+//     },
+//     {
+//         name: "Topic 4",
+//         lectures: [
+//             {
+//                 id: 7,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//             {
+//                 id: 8,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//         ],
+//     },
+//     {
+//         name: "Topic 5",
+//         lectures: [
+//             {
+//                 id: 9,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//             {
+//                 id: 10,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//         ],
+//     },
+//     {
+//         name: "Topic 6",
+//         lectures: [
+//             {
+//                 id: 11,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//             {
+//                 id: 12,
+//                 title: "State Management in React",
+//                 thumbnail: "url_to_thumbnail_image_2",
+//             },
+//         ],
+//     },
+// ];
 
 const Lecture = () => {
     const navigate = useNavigate();
+    const [lectures, setLectures] = useState([]);
+
+    // const [lectures, setLectures] = useState(mockLectures);
     const handleClickLectureItem = (lectureId) => {
         navigate(`/lectures/${lectureId}`);
     }
 
+    const backgroundImageUrl = "../../assets/images/bg.png";
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://20.236.83.109:3000/api/lectures");
+                const data = await response.json();
+                data.map((item) => {
+                    let lecture = {
+                        id: item.id,
+                        title: item.title,
+                        thumbnail: item.thumbnail,
+                    };
+                    setLectures((lectures) => [...lectures, lecture]);
+                });
+                console.log(data);
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
+        fetchData();
+    }
+    , []);
+
+   
+
     return (
-        <div className="lecture">
-            <div className="lecture-list">
-                {
-                    lectures.map((lecture) => {
-                        return <LectureItemThumb lecture={lecture} key={lecture.id} onClick={handleClickLectureItem} />
-                    })
-                }
+        <div className="lecture"
+            style={{
+                backgroundImage: `url("${backgroundImageUrl}")`,
+                backgroundSize: 'cover',
+
+            }}
+        >
+            
+            {/* Topic session */}
+            <div className="px-32 py-8">
+                <h2 class="font-bold text-4xl py-8 mr-auto mt-16">
+                    <a>Topic 1</a>
+                </h2>
+               
+                <div className="lecture-list">
+                    {
+                        lectures.map((lecture) => {
+                            return <LectureItemThumb lecture={lecture} key={lecture.id} onClick={handleClickLectureItem} />
+                        })
+                    }
+                </div>
             </div>
+
+            <div className="px-32 py-8">
+                <h2 class="font-bold text-4xl py-8 mr-auto mt-16">
+                    <a>Topic 2</a>
+                </h2>
+               
+                <div className="lecture-list">
+                    {
+                        lectures.map((lecture) => {
+                            return <LectureItemThumb lecture={lecture} key={lecture.id} onClick={handleClickLectureItem} />
+                        })
+                    }
+                </div>
+            </div>
+
+            <div className="px-32 py-8">
+                <h2 class="font-bold text-4xl py-8 mr-auto mt-16">
+                    <a>Topic 3</a>
+                </h2>
+               
+                <div className="lecture-list">
+                    {
+                        lectures.map((lecture) => {
+                            return <LectureItemThumb lecture={lecture} key={lecture.id} onClick={handleClickLectureItem} />
+                        })
+                    }
+                </div>
+            </div>
+
+            <div className="px-32 py-8">
+                <h2 class="font-bold text-4xl py-8 mr-auto mt-16">
+                    <a>Topic 4</a>
+                </h2>
+               
+                <div className="lecture-list">
+                    {
+                        lectures.map((lecture) => {
+                            return <LectureItemThumb lecture={lecture} key={lecture.id} onClick={handleClickLectureItem} />
+                        })
+                    }
+                </div>
+            </div>
+
+            <div className="px-32 py-8">
+                <h2 class="font-bold text-4xl py-8 mr-auto mt-16">
+                    <a>Topic 5</a>
+                </h2>
+               
+                <div className="lecture-list">
+                    {
+                        lectures.map((lecture) => {
+                            return <LectureItemThumb lecture={lecture} key={lecture.id} onClick={handleClickLectureItem} />
+                        })
+                    }
+                </div>
+            </div>
+
+            <div className="px-32 py-8">
+                <h2 class="font-bold text-4xl py-8 mr-auto mt-16">
+                    <a>Topic 5</a>
+                </h2>
+               
+                <div className="lecture-list">
+                    {
+                        lectures.map((lecture) => {
+                            return <LectureItemThumb lecture={lecture} key={lecture.id} onClick={handleClickLectureItem} />
+                        })
+                    }
+                </div>
+            </div>
+           
+
         </div>
     );
 }

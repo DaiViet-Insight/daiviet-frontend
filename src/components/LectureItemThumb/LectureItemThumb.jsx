@@ -7,7 +7,10 @@ const LectureItemThumb = ({ lecture, onClick }) => {
     }
 
     return (
-        <div className="lecture-item-thumb">
+        <div className="
+        lecture-item-thumb"
+        
+        >
             <div className="lecture-item-thumb__image" onClick={handleOnClick}>
                 <img src={lecture.thumbnail} alt={lecture.title} />
                 <div className="lecture-item-thumb__image-opacity"></div>

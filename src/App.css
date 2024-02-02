@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
   font-family: 'IBM Plex Sans', sans-serif;
 }
@@ -36,4 +36,20 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.rootAuthenticationForm {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+}
+
+.rootChatBox {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 101;
 }

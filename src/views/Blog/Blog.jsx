@@ -1,45 +1,54 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useUser } from "../../contexts/UserContext";
 import './Blog.css';
 import { BackToTopButton } from "../../components/Button";
 import { CreatePostPanel, FilterPosts, QuickAccess } from "../../components";
 import Post from "../containers/Post/Post";
 
-const posts = [
-    {
-        id: 1,
-        avatar: "https://b.thumbs.redditmedia.com/J_fCwTYJkoM-way-eaOHv8AOHoF_jNXNqOvPrQ7bINY.png",
-        username: "Author",
-        creationDate: "2024-01-01",
-        title: "Post 1",
-        subscription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, elit quis efficitur tincidunt, sem sem sodales libero, nec tincidunt ipsum velit eu sem. Duis ac metus ac nisl ultricies varius. Cras nec semper magna. Nullam euismod nisl et nunc lacinia, eu lacinia ipsum ultrices. Sed sit amet semper nisl. Nullam eget semper nisl. Nulla facilisi. Nulla facilisi. Donec id semper magna. Nulla facilisi. Nulla facilisi. Donec id semper magna."
-    },
-    {
-        id: 2,
-        avatar: "https://b.thumbs.redditmedia.com/J_fCwTYJkoM-way-eaOHv8AOHoF_jNXNqOvPrQ7bINY.png",
-        username: "Author",
-        creationDate: "2024-01-01",
-        title: "Post 2",
-        subscription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, elit quis efficitur tincidunt, sem sem sodales libero, nec tincidunt ipsum velit eu sem. Duis ac metus ac nisl ultricies varius. Cras nec semper magna. Nullam euismod nisl et nunc lacinia, eu lacinia ipsum ultrices. Sed sit amet semper nisl. Nullam eget semper nisl. Nulla facilisi. Nulla facilisi. Donec id semper magna. Nulla facilisi. Nulla facilisi. Donec id semper magna."
-    },
-    {
-        id: 3,
-        avatar: "https://b.thumbs.redditmedia.com/J_fCwTYJkoM-way-eaOHv8AOHoF_jNXNqOvPrQ7bINY.png",
-        username: "Author",
-        creationDate: "2024-01-01",
-        title: "Post 3",
-        subscription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, elit quis efficitur tincidunt, sem sem sodales libero, nec tincidunt ipsum velit eu sem. Duis ac metus ac nisl ultricies varius. Cras nec semper magna. Nullam euismod nisl et nunc lacinia, eu lacinia ipsum ultrices. Sed sit amet semper nisl. Nullam eget semper nisl. Nulla facilisi. Nulla facilisi. Donec id semper magna. Nulla facilisi. Nulla facilisi. Donec id semper magna."
-    },
-    {
-        id: 4,
-        avatar: "https://b.thumbs.redditmedia.com/J_fCwTYJkoM-way-eaOHv8AOHoF_jNXNqOvPrQ7bINY.png",
-        username: "Author",
-        creationDate: "2024-01-01",
-        title: "Post 4",
-        subscription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, elit quis efficitur tincidunt, sem sem sodales libero, nec tincidunt ipsum velit eu sem. Duis ac metus ac nisl ultricies varius."
-    }
-];
-
 const Blog = () => {
+    const { setIsShowAuthModal } = useUser();
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://20.236.83.109:3000/api/posts?type=new&size=10", 
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
+                    }
+                );
+                if (response.status === 401) {
+                    setIsShowAuthModal(true);
+                    return;
+                }
+                const data = await response.json();
+                console.log(data);
+                data.forEach((item) => {
+                    const post = {
+                        id: item.id,
+                        title: item.title,
+                        subscription: item.content,
+                        creationDate: item.createdAt,
+                        fullname: item.User.fullname,
+                        avatar: item.User.avatar,
+                        voteCount: item.voteCount,
+                        currentUserUpvoted: item.currentUserUpvoted,
+                        currentUserDownvoted: item.currentUserDownvoted,
+                    }
+                    setPosts((posts) => [...posts, post]);
+                });
+            }
+            catch (error) {
+                console.log("error", error);
+            }
+        }
+        fetchData();
+    }, []);
 
     return (
         <div className="blog">

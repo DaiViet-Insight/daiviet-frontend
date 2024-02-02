@@ -1,8 +1,12 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "http://20.236.83.109:3000",
     withCredentials: false,
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+    }
 });
 
 export function makeRequest(url, options = {}) {
