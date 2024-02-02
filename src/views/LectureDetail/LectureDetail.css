@@ -28,6 +28,7 @@
     margin-bottom: 20px;
     display: flex;
     justify-content: flex-end;
+    gap: 20px;
 }
 
 .lecture-detail__btn {
