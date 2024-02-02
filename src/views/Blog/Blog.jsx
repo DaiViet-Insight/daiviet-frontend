@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useUser } from "../../contexts/UserContext";
 import './Blog.css';
 import { BackToTopButton } from "../../components/Button";
-import { CreatePostPanel, FilterPosts, QuickAccess } from "../../components";
+import { CreatePostPanel, FilterPosts, QuickAccess ,TimeSlider} from "../../components";
 import Post from "../containers/Post/Post";
 
 const Blog = () => {
@@ -61,6 +61,9 @@ const Blog = () => {
 
     return (
         <div className="blog">
+            <div>
+                <TimeSlider />
+            </div>
             <div className="blog-left">
                 <CreatePostPanel />
                 <FilterPosts type={filter} onFilterPostsChange={handleFilterPostsChange} />

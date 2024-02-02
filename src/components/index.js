@@ -13,8 +13,9 @@ import SearchBarEvent from './SearchBarEvent/SearchBarEvent';
 import LectureItemThumb from './LectureItemThumb/LectureItemThumb';
 import RelatedLecture from './RelatedLecture/RelatedLecture';
 import EventAttach from './EventAttach/EventAttach';
+import TimeSlider from './TimeSlider/TimeSlider';
 
-export { ToolStripProfile, CreatePostPanel, FilterPosts, QuickAccess, CommentHeader, CommentList, CommentItem, CommentInput, PostSkeleton, ProfilePanel, SearchBar };
+export { ToolStripProfile, CreatePostPanel, FilterPosts, QuickAccess, CommentHeader, CommentList, CommentItem, CommentInput, PostSkeleton, ProfilePanel, SearchBar,TimeSlider };
 export { LectureItemThumb, RelatedLecture }
 export { SearchBarEvent }
 export { EventAttach }

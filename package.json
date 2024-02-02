@@ -15,11 +15,13 @@
     "axios": "^1.6.5",
     "html-to-text": "^9.0.5",
     "react": "^18.2.0",
+    "react-date-range": "^2.0.0-alpha.4",
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
     "react-resizable": "^3.0.5",
     "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",
+    "react-slider": "^2.0.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
