@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useState, useRef } from "react";
+import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import './Navbar.css';
 import logo from '../../../assets/images/Reddit-Logo.png';
@@ -51,28 +51,13 @@ const Navbar = () => {
         setIsShowNotificationPanel(!isShowNotificationPanel);
     }
 
-    const [dataSearchBar, setDataSearchBar] = useState([]);
-    const dataRef = useRef(null);
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch("http://20.236.83.109:3000/api/events");
-                const data = await response.json();
-                let dataSearchBar = [];
-                for (let i = 0; i < data.length; i++) {
-                    dataSearchBar = [...dataSearchBar, data[i].name];
-                }
-                setDataSearchBar(dataSearchBar);
-                dataRef.current.setData(dataSearchBar);
-            }
-            catch (error) {
-                dataRef.current.setData([]);
-                console.log("error", error);
-            }
-        }
-        fetchData();
-    }, []);
+    const dataSearchBar = [
+        "Tìm kiếm 1",
+        "Tìm kiếm 2",
+        "Tìm kiếm 3",
+        "Tìm kiếm 4",
+        "Tìm kiếm 5"
+    ];
 
     return (
         <div className="navbar">
@@ -80,7 +65,7 @@ const Navbar = () => {
                 <img src={logo} alt="logo" className="navbar-logo" />
             </Link>
             <div className="navbar-search-form">
-                <SearchBar inputPlaceholder={"Tìm kiếm"} data={dataSearchBar} ref={dataRef} />
+                <SearchBar inputPlaceholder={"Tìm kiếm"} data={dataSearchBar} />
             </div>
             <ul className="navbar-list">
                 <li className="navbar-item navbar-item__notification">

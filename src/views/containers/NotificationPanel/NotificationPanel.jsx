@@ -1,92 +1,48 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import './NotificationPanel.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 
-import { useUser } from "../../../contexts/UserContext";
-
-// const notifications = [
-//     {
-//         id: 1,
-//         avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-//         title: "u/Tuan Tran upvoted your post",
-//         time: "1 day ago",
-//         content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
-//     },
-//     {
-//         id: 2,
-//         avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-//         title: "u/Tuan Tran upvoted your post",
-//         time: "1 day ago",
-//         content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
-//     },
-//     {
-//         id: 3,
-//         avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-//         title: "u/Tuan Tran upvoted your post",
-//         time: "1 day ago",
-//         content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
-//     },
-//     {
-//         id: 4,
-//         avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-//         title: "u/Tuan Tran upvoted your post",
-//         time: "1 day ago",
-//         content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
-//     },
-//     {
-//         id: 5,
-//         avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-//         title: "u/Tuan Tran upvoted your post",
-//         time: "1 day ago",
-//         content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
-//     }
-// ];
+const notifications = [
+    {
+        id: 1,
+        avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+        title: "u/Tuan Tran upvoted your post",
+        time: "1 day ago",
+        content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
+    },
+    {
+        id: 2,
+        avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+        title: "u/Tuan Tran upvoted your post",
+        time: "1 day ago",
+        content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
+    },
+    {
+        id: 3,
+        avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+        title: "u/Tuan Tran upvoted your post",
+        time: "1 day ago",
+        content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
+    },
+    {
+        id: 4,
+        avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+        title: "u/Tuan Tran upvoted your post",
+        time: "1 day ago",
+        content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
+    },
+    {
+        id: 5,
+        avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+        title: "u/Tuan Tran upvoted your post",
+        time: "1 day ago",
+        content: "Taking into account the difficulties of creating AI tools comparable to ChatGPT acknowledged in this post, it seems urgent to mention Muah AI. Believe it or not, it's free, integrates seamlessly with interactive technologies compared to others, considering its uncensored chat feature, voice commands and authentic photo rendering are the prime highlights."
+    }
+];
 
 const NotificationPanel = ({ isShow, clickEvent }) => {
-    const { setIsShowAuthModal } = useUser();
-    const [notifications, setNotifications] = React.useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch("http://20.236.83.109:3000/api/notifications", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + localStorage.getItem("token")
-                    }
-                });
-
-                if (response.status === 401) {
-                    setIsShowAuthModal(true);
-                    return;
-                }
-
-                if (response.status === 200) {
-
-                const data = await response.json();
-                    const notifications = data.map((notification) => {
-                        return {
-                            id: notification.id,
-                            avatar: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-                            title: notification.title,
-                            time: notification.createdAt,
-                            content: "Temp"
-                        }
-                    });
-                    setNotifications(notifications);
-                }
-            }
-            catch (error) {
-                console.log("error", error);
-            }
-        }
-        fetchData();
-    }, []);
-
-
     return (
     <div 
         className="notification-panel" style={

@@ -1,17 +1,12 @@
 import React from "react";
 import './UpVoteButton.css';
 
-const UpVoteButton = ({idPost, props, upVote, currentUserUpvoted}) => {
+const UpVoteButton = ({idPost, props, upVote}) => {
     let strokeColor = "#000";
     let hoverBackColor = "#ebebeb";
     if (props) {
         strokeColor = props.strokeColor || "#000";
         hoverBackColor = props.hoverBackColor || "#ebebeb";
-    }
-
-    // Kiểm tra nếu currentUserUpvoted là true thì thay đổi màu của biểu tượng
-    if (currentUserUpvoted) {
-        strokeColor = "#ff0000"; // Màu đỏ hoặc màu khác tùy bạn chọn
     }
 
     return (

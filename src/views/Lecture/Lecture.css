@@ -6,13 +6,9 @@
 
 .lecture-list {
     display: flex;
-    /* justify-content:; */
+    justify-content: space-between;
     align-items: center;
-    gap: 56px;
+    gap: 30px;
     flex-wrap: wrap;
-    /* padding: 30px 120px; */
-}
-
-.lecture-list-topic {
-
+    padding: 30px 120px;
 }

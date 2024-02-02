@@ -10,7 +10,7 @@ const Comment = () => {
 
     return <div className="comments">
         <div className="comment-container">
-            <CommentHeader post={post} />
+            <CommentHeader />
             <div className="comment-body">
                 <CommentMain post={post} rootComments={rootComments} />
                 <FollowEvent />
