@@ -29,15 +29,25 @@ const CommentItem = ({ comment }) => {
             .execute({ postId: comment.postId, content, parentId: comment.id })
             .then(result => {
                 setIsReplying(false)
-                if (result === "Tạo comment thành công !!!") {
+                if (result.id !== null && result.id !== undefined) {
                     createLocalComment({
-                        parentId: comment.id,
+                        id: result.id,
+                        parentId: result.rootCommentId,
                         currentUserDownvoted: false,
                         currentUserUpvoted: false,
                         downvotesCount: 0,
-                        fullname: "Tran Tuan",
+                        postedBy: result.postedBy,
                         content: content,
-                        ...comment,
+                        createdAt: result.createdAt,
+                        voteCount: 0,
+                        upVotesCount: 0,
+                        User: {
+                            fullname: result.User?.fullname,
+                            avatar: result.User?.avatar,
+                            id: result.User?.id,
+                        },
+                        fullname: result.User?.fullname,
+                        postId: result.postId,
                     })
                 }
             })
