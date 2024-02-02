@@ -8,10 +8,14 @@ import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 const { useUser } = require("../../contexts/UserContext");
 
 const ToolStripProfile = ({ username , isShow, clickEvent }) => {
-    const { logout } = useUser();
+    const { logout, user, setIsShowAuthModal } = useUser();
 
     const handleLogout = () => {
         logout();
+    }
+
+    const handleLogin = () => {
+        setIsShowAuthModal(true);
     }
 
     return (
@@ -28,18 +32,40 @@ const ToolStripProfile = ({ username , isShow, clickEvent }) => {
                     </span>
                     <ul className="ToolStripProfile-item__subitem-list">
                         <Link to={"/profile/" + username} className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>Cá nhân</Link>
-                        <Link to="/settings" className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>Cài đặt tài khoản</Link>
+                        {
+                            user && (user.role === "moderator" || user.role === "admin" ) ? <Link to="/mod" className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>Duyệt bài viết</Link> : null
+                        }
+                        {
+                            user && (user.role === "moderator" || user.role === "admin" ) ? <Link to="/posts/reported" className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>Bài viết vi phạm</Link> : null
+                        }
+                        {
+                            user && (user.role === "contributor" || user.role === "admin" ) ? <Link to="/lectures/create" className="ToolStripProfile-item__subitem-link" onClick={clickEvent}>Tạo bài giảng</Link> : null
+                        }
                     </ul>
                 </li>
                 <li>
-                    <span className="ToolStripProfile-item__title" onClick={handleLogout} style={
-                        {
-                            cursor: "pointer"
-                        }
-                    }>
-                        <FontAwesomeIcon icon={faArrowRightFromBracket} />
-                        Đăng xuất
-                    </span>
+                    {
+                        user ? (
+                            <span className="ToolStripProfile-item__title" onClick={handleLogout} style={
+                                {
+                                    cursor: "pointer"
+                                }
+                            }>
+                                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                                Đăng xuất
+                            </span>
+                        ) : (
+                            <span className="ToolStripProfile-item__title" onClick={handleLogin} style={
+                                {
+                                    cursor: "pointer"
+                                }
+                            }>
+                                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                                Đăng nhập
+                            </span>
+                        )
+                    }
+                    
                 </li>
             </ul>
         </div>

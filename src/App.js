@@ -16,6 +16,7 @@ import { PostProvider } from "./contexts/PostContext";
 import { AuthenticationForm, ChatBox } from "./views/containers";
 
 import { UserProvider } from "./contexts/UserContext";
+import ReportedPost from "./views/ReportedPost/ReportedPost";
 
 function App() {
   const [isPageNotFound, setIsPageNotFound] = useState(false);
@@ -39,6 +40,7 @@ function App() {
           <Route path="/posts" element={<Blog />} />
           <Route path="/posts/create" element={<CreatePost />} />
           <Route path="/mod" element={<ModSite />} />
+          <Route path="/posts/reported" element={<ReportedPost />} />
           <Route path="/lectures/:id/exam" element={<Exam />} />
           <Route
             path="posts/:id/comments"

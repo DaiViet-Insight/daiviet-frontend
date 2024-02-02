@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import './ProfilePanel.css';
 
-const ProfilePanel = () => {
+const ProfilePanel = ({ user }) => {
     return (
     <div className="profile-panel">
         <div className="profile-panel__avatar">

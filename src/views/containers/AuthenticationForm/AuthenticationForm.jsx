@@ -9,7 +9,7 @@ const typeForm = {
 }
 
 const AuthenticationForm = () => {
-    const { setIsShowAuthModal } = useUser();
+    const { setIsShowAuthModal, setProfileInfo } = useUser();
 
     const [isShowing, setIsShowing] = useState(false);
     const [type, setType] = useState(typeForm.LOGIN);
@@ -39,7 +39,8 @@ const AuthenticationForm = () => {
                 localStorage.removeItem("token");
                 localStorage.setItem("token", data.token);
                 setIsShowAuthModal(false);
-                window.location.reload();
+                setProfileInfo();
+                // window.location.reload();
             }
         }
         catch (error) {
