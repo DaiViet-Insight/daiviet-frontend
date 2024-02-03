@@ -139,7 +139,7 @@ const CreatePost = () => {
             if (response.status === 200) {
                 console.log("abc")
                 setLoading(false);
-                window.location.href = "/reddit-blog-clone/posts";
+                window.location.href = "/daiviet/posts";
                 return;
             }
 
